@@ -1,0 +1,31 @@
+*{
+    background-color: black;
+    color: greenyellow;
+    font-family: monospace;
+}
+
+#header{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#icon{
+    background: url(Pretty\ Sprint.jpg);
+    min-height: 4em;
+    min-width: 4em;
+    border-radius: 50%;
+    border: 1px solid white;
+}
+
+ul{
+    display: flex;
+    list-style: none;
+}
+
+li {
+    margin: 1em;
+    font-size: 2em;
+    font-weight: bolder;
+}
