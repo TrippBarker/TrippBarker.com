@@ -12,6 +12,8 @@
 }
 
 #icon{
+    margin-right: auto;
+    margin-left: 3em;
     background: url(Pretty\ Sprint.jpg);
     min-height: 4em;
     min-width: 4em;
@@ -19,13 +21,34 @@
     border: 1px solid white;
 }
 
-ul{
+#headerLinks{
+    margin-right: 3em;
     display: flex;
     list-style: none;
 }
 
-li {
+li{
     margin: 1em;
     font-size: 2em;
     font-weight: bolder;
+}
+
+#projects{
+    display: flex;
+    margin: 3em;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.projectBox{
+    margin: 1em;
+    padding: .3em;
+    min-height: 12em;
+    max-height: 12em;
+    min-width: 30em;
+    max-width: 30em;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border: .3em solid greenyellow;
 }
