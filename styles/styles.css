@@ -4,7 +4,7 @@
 }
 
 body{
-    background: linear-gradient(135deg, #2B4162 0%, #000000 100%);
+    background: linear-gradient(180deg, #2B4162 0%, #0a0f16 100%);
 }
 
 a{
@@ -15,8 +15,11 @@ h1{
     font-size: 5em;
 }
 
+h2{
+}
+
 img{
-    height: 12em;
+    height: 13em;
     margin-left: auto;
 }
 
@@ -66,17 +69,56 @@ section{
 .projectBox{
     margin: 1em;
     padding: .3em;
-    height: 12em;
+    height: 14em;
     width: 36em;
+    max-width: 40em;
     flex-grow: 1;
     display: flex;
 }
 
 .projectBox:hover{
-    transition: .5s;
+    transition: .25s;
     scale: 1.05;
 }
 
 .projectWords{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 13em;
     margin: .5em;
+}
+
+.languages{
+    display: flex;
+    align-items: baseline;
+}
+
+.dot{
+    height: .5em;
+    width: .5em;
+    border: 1px solid white;
+    border-radius: 100%;
+    margin-right: .5em;
+    margin-left: .5em;
+}
+
+.html{
+    background-color: green;
+}
+
+.css{
+    background-color: purple;
+}
+
+.javascript{
+    background-color: yellow;
+}
+
+.java{
+    background-color: orange;
+}
+
+.python{
+    background-color: blue;
 }
