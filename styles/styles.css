@@ -1,8 +1,10 @@
-
 *{
-    background-color: #2B4162;
     color: #F5F0F6;
     font-family: monospace;
+}
+
+body{
+    background: linear-gradient(135deg, #2B4162 0%, #000000 100%);
 }
 
 a{
