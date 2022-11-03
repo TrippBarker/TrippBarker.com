@@ -13,6 +13,9 @@ a{
 
 h1{
     font-size: 5em;
+    background: -webkit-linear-gradient(210deg, rgb(126, 203, 255), rgb(255, 130, 213));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 h2{
