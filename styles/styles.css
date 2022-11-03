@@ -63,6 +63,14 @@ li{
     height: 12em;
     width: 36em;
     flex-grow: 1;
-    border: 1px solid #F5F0F6;
     display: flex;
+}
+
+.projectBox:hover{
+    transition: .5s;
+    scale: 1.05;
+}
+
+.projectWords{
+    margin: .5em;
 }
