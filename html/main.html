@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles/styles.css">
     <title>TrippBarker.com</title>
 </head>
 <body>
@@ -16,28 +16,38 @@
             <li>CONTACT</li>
         </ul>
     </div>
-
-    <div id="projects">
-        <div id="project1" class="projectBox">
-            <h1>ENIGMA</h1>
-            <img src="" alt="">
-            <p>This is a mock Enigma Machine made in HTML, CSS, and JavaScript</p>
+    <section id="projects">
+        <h1>PROJECTS</h1>
+        <div id="projectContainer">
+            <div id="project1" class="projectBox">
+                <div class="projectWords">
+                    <h2>ENIGMA</h2>
+                    <p>This is a mock Enigma Machine made in HTML, CSS, and JavaScript</p>
+                </div>
+                <img src="/res/images/enigma/enigma1.png" alt="">
+            </div>
+            <div id="project2" class="projectBox">
+                <div class="projectWords">
+                    <h2>JUMP, PUNCH, KICK</h2>
+                    <p>A rock, paper, scissors game made in HTML, CSS, and JavaScript for the Odin Project</p>
+                </div>
+                <img src="/res/images/jpk/jpk1.png" alt="">
+            </div>
+            <div id="project3" class="projectBox">
+                <div class="projectWords">
+                    <h2>TANKS</h2>
+                    <p>A multi player tank shooter game made with Java</p>
+                </div>
+                <img src="/res/images/tanks/tanks1.png" alt="">
+            </div>
+            <div id="project4" class="projectBox">
+                <div class="projectWords">
+                    <h2>MERGESORT</h2>
+                    <p>A Mergesort Java class written for Georgia Gwinnett College</p>
+                </div>
+                <img src="" alt="">
+            </div>
         </div>
-        <div id="project2" class="projectBox">
-            <h1>JUMP, PUNCH, KICK</h1>
-            <img src="" alt="">
-            <p>A rock, paper, scissors game made in HTML, CSS, and JavaScript for the Odin Project</p>
-        </div>
-        <div id="project3" class="projectBox">
-            <h1>TANKS</h1>
-            <img src="" alt="">
-            <p>A multi player tank shooter game made with Java</p>
-        </div>
-        <div id="project4" class="projectBox">
-            <h1>MERGESORT</h1>
-            <img src="" alt="">
-            <p>A Mergesort Java class written for Georgia Gwinnett College</p>
-        </div>
-    </div>
+    </section>
 </body>
 </html>
