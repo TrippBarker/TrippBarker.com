@@ -73,10 +73,11 @@ section{
     margin: 1em;
     padding: .3em;
     height: 14em;
-    width: 36em;
+    width: 40em;
     max-width: 40em;
     flex-grow: 1;
     display: flex;
+    align-items: center;
 }
 
 .projectBox:hover{
@@ -95,11 +96,12 @@ section{
 .languages{
     display: flex;
     align-items: baseline;
+    width: 2em;
 }
 
 .dot{
-    height: .5em;
-    width: .5em;
+    min-height: .5em;
+    min-width: .5em;
     border: 1px solid white;
     border-radius: 100%;
     margin-right: .5em;
@@ -134,4 +136,15 @@ section{
 .contactLink:hover{
     transition: .25s;
     scale: 1.05;
+}
+
+@media only screen and (max-width: 600px){
+
+    .projectBox{
+        scale: .75;
+    }
+
+    .contactLink{
+        height: 3em;
+    }
 }
