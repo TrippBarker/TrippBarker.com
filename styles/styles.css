@@ -4,7 +4,7 @@
 }
 
 body{
-    background: linear-gradient(180deg, #16315a 0%, #2e3f58 100%);
+    background: linear-gradient(135deg, #16315a 0%, #542e58 50%, #16315a 100%);
 }
 
 a{
@@ -16,7 +16,7 @@ h1{
     background: -webkit-linear-gradient(210deg, rgb(126, 203, 255), rgb(255, 130, 213));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-}+
+}
 
 h2{
 }
