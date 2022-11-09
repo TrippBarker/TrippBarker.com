@@ -22,7 +22,7 @@ h2{
 }
 
 img{
-    height: 13em;
+    height: 90%;
     margin-left: auto;
 }
 
@@ -136,6 +136,7 @@ section{
 .contactLink:hover{
     transition: .25s;
     scale: 1.05;
+    transform: rotate(-15deg);
 }
 
 @media only screen and (max-width: 600px){
