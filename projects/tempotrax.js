@@ -1,3 +1,6 @@
+const urlParams = new URLSearchParams(window.location.search);
+let code = urlParams.get('code');
+
 let codeVerifier = localStorage.getItem('code_verifier');
 
 let body = new URLSearchParams({
