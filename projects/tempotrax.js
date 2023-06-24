@@ -1,5 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 let code = urlParams.get('code');
+const clientId = '8e81373db75b4fc1ab89d7e246c17c73';
+const redirectUri = 'https://www.trippbarker.com/projects/tempotrax';
 
 let codeVerifier = localStorage.getItem('code_verifier');
 
