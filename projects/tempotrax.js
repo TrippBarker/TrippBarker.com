@@ -39,10 +39,13 @@ async function getProfile(accessToken) {
     }
   });
 
-  return data = await response.json();
+  const data = await response.json();
+  console.log(data.display_name);
+  return data;
 }
 
-function populateUI(profile) {
+function populateUI() {
+  profile = getProfile();
   document.getElementById("displayName").innerText = profile.display_name;
   if (profile.images[0]) {
       const profileImage = new Image(200, 200);
@@ -58,4 +61,4 @@ function populateUI(profile) {
   document.getElementById("url").setAttribute("href", profile.href);
 }
 
-populateUI(getProfile());
+populateUI();
