@@ -30,22 +30,14 @@ const response = fetch('https://accounts.spotify.com/api/token', {
     console.error('Error:', error);
 });
 
-async function getProfile(accessToken) {
+async function populateUI() {
   accessToken = localStorage.getItem('access_token');
-
   const response = await fetch('https://api.spotify.com/v1/me', {
     headers: {
       Authorization: 'Bearer ' + accessToken
     }
   });
-
-  const data = await response.json();
-  console.log(data.display_name);
-  return data;
-}
-
-function populateUI() {
-  profile = getProfile();
+  profile = await response.json();
   console.log(profile.display_name + " two");
   document.getElementById("displayName").innerText = profile.display_name;
   if (profile.images[0]) {
