@@ -57,8 +57,7 @@ async function populateUI() {
 
 async function getPlaylists(){
   accessToken = localStorage.getItem('access_token');
-  console.log(localStorage.getItem('userID'));
-  const response = await fetch('https://api/spotify.com/user/'+localStorage.getItem('userID')+'playlists', {
+  const response = await fetch('https://api/spotify.com/v1.mw.playlists', {
     headers: {
       Authorization: 'Bearer ' + accessToken
     }
