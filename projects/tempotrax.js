@@ -47,6 +47,7 @@ async function populateUI() {
       document.getElementById("imgUrl").innerText = profile.images[0].url;
   }
   document.getElementById("id").innerText = profile.id;
+  localStorage.setItem('userID', profile.id)
   document.getElementById("email").innerText = profile.email;
   document.getElementById("uri").innerText = profile.uri;
   document.getElementById("uri").setAttribute("href", profile.external_urls.spotify);
@@ -54,4 +55,17 @@ async function populateUI() {
   document.getElementById("url").setAttribute("href", profile.href);
 }
 
+async function getPlaylists(){
+  accessToken = localStorage.getItem('access_token');
+  const response = await fetch('https://api/spotify.com/user/'+localStorage.getItem('userID')+'playlists', {
+    headers: {
+      Authorization: 'Bearer ' + accessToken
+    }
+  });
+  playlists = await response.json();
+  console.log(playlists);
+
+}
+
 populateUI();
+getPlaylists();
