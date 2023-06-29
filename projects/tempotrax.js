@@ -72,7 +72,7 @@ async function createPlaylist(){
   const response = await fetch('https://api.spotify.com/v1/users/'+localStorage.getItem('userID')+'/playlists',{
     headers: {
       Authorization: 'Bearer ' + accessToken,
-      'Content-Type': 'application/json'
+      ContentType: 'application/json'
     },
     data: {
       'name': 'TempoTrax Playlist',
