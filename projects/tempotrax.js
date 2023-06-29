@@ -71,6 +71,9 @@ async function createPlaylist(){
   accessToken = localStorage.getItem('access_token');
   const response = await fetch('https://api.spotify.com/v1/users/'+localStorage.getItem('userID')+'/playlists',{
     headers: {
+      AccessControlAllowOrigin: '*',
+      AccessControlAllowMethods: 'GET,HEAD,OPTIONS,POST,PUT',
+      AccessControlAllowHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
       Authorization: 'Bearer ' + accessToken,
       ContentType: 'application/json'
     },
