@@ -64,29 +64,16 @@ async function getPlaylists(){
   });
   playlists = await response.json();
   console.log(playlists);
-
 }
 
 async function createPlaylist(){
   accessToken = localStorage.getItem('access_token');
-  const response = await fetch('https://api.spotify.com/v1/users/'+localStorage.getItem('userID')+'/playlists', {
-    headers: {
-      Authorization: 'Bearer ' + accessToken,
-    }
+  fetch('https://api.spotify.com/v1/users/'+localStorage.getItem('userID')+'/playlists')
+  .then(response=>{
+    return response.json();
+  }).then(json=>{
+    console.log(json);
   })
-  response = await fetch('https://api.spotify.com/v1/users/'+localStorage.getItem('userID')+'/playlists', {
-    headers: {
-      ContentType: 'application/json',
-    },
-    data: {
-      'name': 'TempoTrax Playlist',
-      'description': 'New Playlist',
-      'public': false
-    }
-  })
-  
-
-  console.log(response);
 }
 
 populateUI();
