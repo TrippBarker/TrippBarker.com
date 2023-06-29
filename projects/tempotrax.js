@@ -74,11 +74,11 @@ async function createPlaylist(){
       Authorization: 'Bearer ' + accessToken,
       'Content-Type': 'application/json'
     },
-    data: {
+    data: JSON.stringify({
       'Name': 'TempoTrax Playlist',
       'decription': 'TempoTrax Playlist',
       'public': false
-    }
+    })
   })
   const data = await response.json();
   console.log(data);
