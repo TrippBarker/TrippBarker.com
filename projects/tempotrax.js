@@ -74,9 +74,7 @@ async function createPlaylist(){
       Authorization: 'Bearer ' + accessToken,
       'Content-Type': 'application/json'
     },
-    data: {
-      body: JSON.stringify({name: "TempoTrax Playlist", description: "A playlist created with TempoTrax https://www.trippbarker.com/projects/tempotraxinit" public: false})
-    }
+    body: JSON.stringify({name: "TempoTrax Playlist", description: "A playlist created with TempoTrax https://www.trippbarker.com/projects/tempotraxinit", public: false})
   })
   const data = await response.json();
   console.log(data);
