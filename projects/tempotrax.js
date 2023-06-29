@@ -68,12 +68,14 @@ async function getPlaylists(){
 
 async function createPlaylist(){
   accessToken = localStorage.getItem('access_token');
-  fetch('https://api.spotify.com/v1/users/'+localStorage.getItem('userID')+'/playlists')
-  .then(response=>{
-    return response.json();
-  }).then(json=>{
-    console.log(json);
+  const response = await fetch('https://api.spotify.com/v1/users/'+localStorage.getItem('userID')+'/playlist',{
+    headers: {
+      Authorization: 'Bearer ' + accessToken
+    }
   })
+  const data = await response.json();
+  console.log(data);
+
 }
 
 populateUI();
