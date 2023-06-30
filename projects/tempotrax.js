@@ -25,6 +25,7 @@ const response = fetch('https://accounts.spotify.com/api/token', {
     }
     return response.json();
 }).then(data => {
+    console.log(data);
     localStorage.setItem('access_token', data.access_token);
 }).catch(error => {
     console.error('Error:', error);
