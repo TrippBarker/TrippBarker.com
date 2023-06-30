@@ -63,7 +63,7 @@ async function getPlaylists(){
     }
   });
   playlists = await response.json();
-  return JSON.parse(playlists);
+  return playlists.items();
 }
 
 async function createPlaylist(){
