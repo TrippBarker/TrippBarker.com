@@ -84,3 +84,7 @@ async function createPlaylist(){
   console.log(data);
 
 }
+
+populateUI();
+getPlaylists();
+const userPlaylists = getPlaylists();
