@@ -63,7 +63,8 @@ async function getPlaylists(){
       Authorization: 'Bearer ' + accessToken
     }
   });
-  playlists = await response.json();
+  const playlists = await response.json();
+  console.log(playlists.items);
   return playlists;
 }
 
