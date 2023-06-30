@@ -64,7 +64,7 @@ async function getPlaylists(){
     }
   });
   const playlists = await response.json();
-  console.log(playlists.items);
+  console.log(playlists.items[0].id);
   return playlists;
 }
 
