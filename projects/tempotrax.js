@@ -64,8 +64,10 @@ async function getPlaylists(){
     }
   });
   const playlists = await response.json();
-  console.log(playlists.items[0].id);
-  return playlists;
+  for (let i = 0; i < playlists.items.length; i ++){
+    console.log(playlists.items[0].id);
+  }
+  return playlists.items;
 }
 
 async function createPlaylist(){
@@ -86,5 +88,3 @@ async function createPlaylist(){
 populateUI();
 getPlaylists();
 const userPlaylists = getPlaylists();
-
-console.log(userPlaylists);
