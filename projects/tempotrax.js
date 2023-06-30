@@ -67,7 +67,6 @@ async function getPlaylists(){
   for (let i = 0; i < playlists.items.length; i ++){
     console.log(playlists.items[i].id);
   }
-  return playlists.items;
 }
 
 async function createPlaylist(){
@@ -87,4 +86,4 @@ async function createPlaylist(){
 
 populateUI();
 getPlaylists();
-const userPlaylists = getPlaylists();
+getPlaylists();
