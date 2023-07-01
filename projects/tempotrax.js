@@ -66,6 +66,7 @@ async function getPlaylists(){
   const playlists = await response.json();
   for (let i = 0; i < playlists.items.length; i ++){
     console.log(playlists.items[i].id);
+    readPlaylist(playlists.items[i].id);
   }
 }
 
@@ -82,6 +83,17 @@ async function createPlaylist(){
   const data = await response.json();
   console.log(data);
 
+}
+
+async function readPlaylist(playlistID){
+  accessToken = localStorage.getItem('access_token');
+  const response = await fetch('https://api.spotify.com/v1/playlists/'+playlistID+'/tracks', {
+    headers: {
+      Authorization: 'Bearer ' + accessToken
+    }
+  })
+  const tracks = await response.json();
+  console.log(tracks);
 }
 
 populateUI();
