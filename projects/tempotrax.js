@@ -79,6 +79,14 @@ async function readPlaylist(playlistID){
   })
   const tracks = await response.json();
   for (let i = 0; i < tracks.items.length; i++){
+    const trackFeat = await fetch('https://api.spotify.com/v1/audio-features?ids=' + tracks.items[i].track.id,{
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + accessToken
+      }
+    })
+    const trackTempo = await trackFeat.json();
+    console.log(trackTempo);
     console.log(tracks.items[i].track.name + " " + tracks.items[i].track.tempo);
   }
   console.log(tracks);
