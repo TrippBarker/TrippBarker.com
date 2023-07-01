@@ -85,7 +85,7 @@ async function readPlaylist(playlistID){
         Authorization: 'Bearer ' + accessToken
       }
     })
-    const trackTempo = await trackFeat.json();
+    const trackTempo = await trackFeat.json().audio_features.tempo;
     console.log(trackTempo);
     console.log(tracks.items[i].track.name + " " + tracks.items[i].track.tempo);
   }
