@@ -87,8 +87,9 @@ async function readPlaylist(playlistID){
     })
     const trackTempo = await trackFeat.json();
     const audioFeatures = trackTempo.audio_features;
-    console.log(audioFeatures);
-    console.log(tracks.items[i].track.name + " " + audioFeatures[0].tempo);
+    if (audioFeatures[0].tempo > 110 && audioFeatures[0].tempo < 125){
+      console.log(tracks.items[i].track.name + " " + audioFeatures[0].tempo);
+    }
   }
   console.log(tracks);
 }
