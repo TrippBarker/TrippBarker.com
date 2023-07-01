@@ -78,8 +78,8 @@ async function readPlaylist(playlistID){
     }
   })
   const tracks = await response.json();
-  for (let i = 0; i < tracks.length; i++){
-    console.log(track[i].)
+  for (let i = 0; i < tracks.items.length; i++){
+    console.log(tracks.items[i].track);
   }
   console.log(tracks);
 }
