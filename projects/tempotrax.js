@@ -31,14 +31,14 @@ const response = fetch('https://accounts.spotify.com/api/token', {
     console.error('Error:', error);
 });
 
-async function populateUI() {
+function populateUI() {
   accessToken = localStorage.getItem('access_token');
-  const response = await fetch('https://api.spotify.com/v1/me', {
+  const response = fetch('https://api.spotify.com/v1/me', {
     headers: {
       Authorization: 'Bearer ' + accessToken
     }
   });
-  profile = await response.json();
+  profile = response.json();
   console.log(profile.display_name + " two");
   document.getElementById("displayName").innerText = profile.display_name;
   if (profile.images[0]) {
@@ -56,23 +56,34 @@ async function populateUI() {
   document.getElementById("url").setAttribute("href", profile.href);
 }
 
-async function getPlaylists(){
+function getPlaylists(){
   accessToken = localStorage.getItem('access_token');
-  const response = await fetch('https://api.spotify.com/v1/me/playlists', {
+  const response = fetch('https://api.spotify.com/v1/me/playlists', {
     headers: {
       Authorization: 'Bearer ' + accessToken
     }
   });
-  const playlists = await response.json();
+  const playlists =  response.json();
   for (let i = 0; i < playlists.items.length; i ++){
     console.log(playlists.items[i].id);
     readPlaylist(playlists.items[i].id);
   }
 }
 
-async function createPlaylist(){
+function readPlaylist(playlistID){
   accessToken = localStorage.getItem('access_token');
-  const response = await fetch('https://api.spotify.com/v1/users/'+localStorage.getItem('userID')+'/playlists',{
+  const response = fetch('https://api.spotify.com/v1/playlists/'+playlistID+'/tracks', {
+    headers: {
+      Authorization: 'Bearer ' + accessToken
+    }
+  })
+  const tracks = response.json();
+  console.log(tracks);
+}
+
+function createPlaylist(){
+  accessToken = localStorage.getItem('access_token');
+  const response = fetch('https://api.spotify.com/v1/users/'+localStorage.getItem('userID')+'/playlists',{
     method: 'POST',
     headers: {
       Authorization: 'Bearer ' + accessToken,
@@ -80,20 +91,9 @@ async function createPlaylist(){
     },
     body: JSON.stringify({name: "TempoTrax Playlist", description: "A playlist created with TempoTrax https://www.trippbarker.com/projects/tempotraxinit", public: false})
   })
-  const data = await response.json();
+  const data = response.json();
   console.log(data);
 
-}
-
-async function readPlaylist(playlistID){
-  accessToken = localStorage.getItem('access_token');
-  const response = await fetch('https://api.spotify.com/v1/playlists/'+playlistID+'/tracks', {
-    headers: {
-      Authorization: 'Bearer ' + accessToken
-    }
-  })
-  const tracks = await response.json();
-  console.log(tracks);
 }
 
 populateUI();
