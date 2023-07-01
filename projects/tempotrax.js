@@ -88,7 +88,7 @@ async function readPlaylist(playlistID){
     const trackTempo = await trackFeat.json();
     const audioFeatures = trackTempo.audio_features;
     console.log(audioFeatures);
-    console.log(tracks.items[i].track.name + " " + audioFeatures.tempo[0].tempo);
+    console.log(tracks.items[i].track.name + " " + audioFeatures[0].tempo);
   }
   console.log(tracks);
 }
