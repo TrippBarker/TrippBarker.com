@@ -106,8 +106,11 @@ async function createPlaylist(){
   })
   const data = await response.json();
   console.log(data);
+}
 
+async function addSongsToPlayList(){
+  accessToken = localStorage.getItem('access_token');
 }
 
 populateUI();
-getPlaylists();
+createPlaylist();
