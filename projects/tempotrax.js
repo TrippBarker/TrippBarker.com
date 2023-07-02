@@ -21,6 +21,7 @@ let body = new URLSearchParams({
   client_id: clientId,
   code_verifier: codeVerifier
 });
+
 async function getAccessToken(){
   const response = fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',
