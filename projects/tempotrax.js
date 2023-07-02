@@ -5,6 +5,8 @@ const redirectUri = 'https://www.trippbarker.com/projects/tempotrax';
 
 let codeVerifier = localStorage.getItem('code_verifier');
 let playlistSongs = '';
+const maxSize = 99;
+let playlistSize = 0;
 
 let body = new URLSearchParams({
   grant_type: 'authorization_code',
@@ -57,6 +59,7 @@ async function populateUI() {
 }
 
 async function getPlaylists(){
+  playlistSize = 0;
   accessToken = localStorage.getItem('access_token');
   const response = await fetch('https://api.spotify.com/v1/me/playlists', {
     headers: {
@@ -86,14 +89,15 @@ async function readPlaylist(playlistID){
     })
     const trackTempo = await trackFeat.json();
     const audioFeatures = trackTempo.audio_features;
-    if (audioFeatures[0].tempo > 110 && audioFeatures[0].tempo < 125){
+    if (audioFeatures[0].tempo > 110 && audioFeatures[0].tempo < 125 && playlistSize < maxSize){
       songID = tracks.items[i].track.id
+      playlistSize++;
       if (playlistSongs.length == 0){
         playlistSongs += '"spotify:track:'+songID+'"';
       } else {
         playlistSongs += ',"spotify:track:'+songID+'"';
       }
-      console.log(songID);
+      console.log(songID + ' ' + playlistSize);
     }
   }
 }
