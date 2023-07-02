@@ -88,6 +88,7 @@ async function readPlaylist(playlistID){
     const audioFeatures = trackTempo.audio_features;
     if (audioFeatures[0].tempo > 110 && audioFeatures[0].tempo < 125){
       songID = tracks.items[i].track.id
+      playlistSongs += songID;
       console.log(songID);
     }
   }
@@ -123,3 +124,5 @@ async function addSongsToPlaylist(playlistID){
 getAccessToken();
 populateUI();
 getPlaylists();
+
+console.log(playlistSongs);
