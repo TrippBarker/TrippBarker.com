@@ -4,6 +4,7 @@ const clientId = '8e81373db75b4fc1ab89d7e246c17c73';
 const redirectUri = 'https://www.trippbarker.com/projects/tempotrax';
 
 let codeVerifier = localStorage.getItem('code_verifier');
+let songs = '';
 
 let body = new URLSearchParams({
   grant_type: 'authorization_code',
@@ -88,7 +89,7 @@ async function readPlaylist(playlistID){
     const trackTempo = await trackFeat.json();
     const audioFeatures = trackTempo.audio_features;
     if (audioFeatures[0].tempo > 110 && audioFeatures[0].tempo < 125){
-      console.log(tracks.items[i].track.name + " " + audioFeatures[0].tempo);
+      songs+= '"spotify:track:"'+tracks.items[i].track.id+', ';
     }
   }
   console.log(tracks);
@@ -116,11 +117,12 @@ async function addSongsToPlayList(playlistID){
       Authorization: 'Bearer ' + accessToken,
       'Content-Type': 'application/json'
     },
-    body:"spotify:track:4iV5W9uYEdYUVa79Axb7Rh,spotify:track:1301WleyT98MSxVHPZCA6M"
+    body:'{"uris": ['+songs+']}'
   })
   const addSongsRes = await response.json();
   console.log(addSongsRes);
 }
 
 populateUI();
+getPlaylists();
 createPlaylist();
