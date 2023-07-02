@@ -13,24 +13,25 @@ let body = new URLSearchParams({
   client_id: clientId,
   code_verifier: codeVerifier
 });
-
-const response = fetch('https://accounts.spotify.com/api/token', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded'
-  },
-  body: body
-}).then(response => {
-    if (!response.ok) {
-      throw new Error('HTTP status ' + response.status);
-    }
-    return response.json();
-}).then(data => {
-    console.log(data);
-    localStorage.setItem('access_token', data.access_token);
-}).catch(error => {
-    console.error('Error:', error);
-});
+async function getAccessToken(){
+  const response = fetch('https://accounts.spotify.com/api/token', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: body
+  }).then(response => {
+      if (!response.ok) {
+        throw new Error('HTTP status ' + response.status);
+      }
+      return response.json();
+  }).then(data => {
+      console.log(data);
+      localStorage.setItem('access_token', data.access_token);
+  }).catch(error => {
+      console.error('Error:', error);
+  });
+}
 
 async function populateUI() {
   accessToken = localStorage.getItem('access_token');
@@ -91,8 +92,8 @@ async function readPlaylist(playlistID){
     if (audioFeatures[0].tempo > 110 && audioFeatures[0].tempo < 125){
       songs+= '"spotify:track:"'+tracks.items[i].track.id+', ';
     }
+    console.log(songs);
   }
-  console.log(tracks);
 }
 
 async function createPlaylist(){
@@ -123,6 +124,7 @@ async function addSongsToPlayList(playlistID){
   console.log(addSongsRes);
 }
 
+getAccessToken();
 populateUI();
 getPlaylists();
 createPlaylist();
