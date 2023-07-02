@@ -91,7 +91,7 @@ async function readPlaylist(playlistID){
       if (playlistSongs.length == 0){
         playlistSongs += '"spotify:track:'+songID+'"';
       } else {
-        ',"spotify:track:'+songID+'"';
+        playlistSongs += ',"spotify:track:'+songID+'"';
       }
       console.log(songID);
     }
@@ -128,5 +128,4 @@ async function addSongsToPlaylist(playlistID){
 getAccessToken();
 populateUI();
 getPlaylists();
-
-console.log(playlistSongs);
+createPlaylist();
