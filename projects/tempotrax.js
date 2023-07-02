@@ -26,7 +26,6 @@ async function getAccessToken(){
       }
       return response.json();
   }).then(data => {
-      console.log(data);
       localStorage.setItem('access_token', data.access_token);
   }).catch(error => {
       console.error('Error:', error);
@@ -41,7 +40,6 @@ async function populateUI() {
     }
   });
   profile = await response.json();
-  console.log(profile.display_name + " two");
   document.getElementById("displayName").innerText = profile.display_name;
   if (profile.images[0]) {
       const profileImage = new Image(200, 200);
@@ -114,7 +112,6 @@ async function createPlaylist(){
 }
 
 async function addSongsToPlaylist(playlistID){
-  console.log(playlistSongs);
   accessToken = localStorage.getItem('access_token');
   const response = await fetch('https://api.spotify.com/v1/playlists/'+playlistID+'/tracks',{
     method: 'POST',
@@ -129,4 +126,4 @@ async function addSongsToPlaylist(playlistID){
 
 getAccessToken();
 populateUI();
-console.log(getPlaylists());
+getPlaylists();
