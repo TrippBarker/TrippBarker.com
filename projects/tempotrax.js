@@ -102,14 +102,24 @@ async function createPlaylist(){
       Authorization: 'Bearer ' + accessToken,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({name: "TempoTrax Playlist", description: "A playlist created with TempoTrax https://www.trippbarker.com/projects/tempotraxinit", public: false})
+    body: JSON.stringify({name: "Testy Test", description: "A playlist created with TempoTrax https://www.trippbarker.com/projects/tempotraxinit", public: false})
   })
   const data = await response.json();
-  console.log(data);
+  addSongsToPlayList(data.id);
 }
 
-async function addSongsToPlayList(){
+async function addSongsToPlayList(playlistID){
   accessToken = localStorage.getItem('access_token');
+  const response = await fetch('https://api.spotify.com/v1/playlists/'+playlistID+'/tracks',{
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + accessToken,
+      'Content-Type': 'application/json'
+    },
+    body:"spotify:track:4iV5W9uYEdYUVa79Axb7Rh,spotify:track:1301WleyT98MSxVHPZCA6M"
+  })
+  const addSongsRes = await response.json();
+  console.log(addSongsRes);
 }
 
 populateUI();
