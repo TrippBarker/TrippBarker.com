@@ -4,7 +4,7 @@ const clientId = '8e81373db75b4fc1ab89d7e246c17c73';
 const redirectUri = 'https://www.trippbarker.com/projects/tempotrax';
 
 let codeVerifier = localStorage.getItem('code_verifier');
-localStorage.setItem('playlistSongs', '');
+let playlistSongs = '';
 
 let body = new URLSearchParams({
   grant_type: 'authorization_code',
@@ -67,8 +67,7 @@ async function getPlaylists(){
   });
   const playlists =  await response.json();
   for (let i = 0; i < playlists.items.length; i ++){
-    console.log(playlists.items[i].id);
-    songs = readPlaylist(playlists.items[i].id, songs);
+    readPlaylist(playlists.items[i].id);
   }
 }
 
@@ -90,8 +89,9 @@ async function readPlaylist(playlistID){
     const trackTempo = await trackFeat.json();
     const audioFeatures = trackTempo.audio_features;
     if (audioFeatures[0].tempo > 110 && audioFeatures[0].tempo < 125){
-      localStorage.setItem('playlistSongs', localStorage.getItem('playlistSongs' + '"spotify:track:"'+tracks.items[i].track.id+'", '));
+      playlistSongs += '"spotify:track:"'+tracks.items[i].track.id+'", ';
     }
+    console.log(localStorage.getItem('playlistSongs'));
   }
 }
 
@@ -110,7 +110,7 @@ async function createPlaylist(){
 }
 
 async function addSongsToPlaylist(playlistID){
-  console.log(localStorage.getItem('playlistSongs'));
+  console.log(playlistSongs);
   accessToken = localStorage.getItem('access_token');
   const response = await fetch('https://api.spotify.com/v1/playlists/'+playlistID+'/tracks',{
     method: 'POST',
@@ -118,7 +118,7 @@ async function addSongsToPlaylist(playlistID){
       Authorization: 'Bearer ' + accessToken,
       'Content-Type': 'application/json'
     },
-    body:'{"uris": ['+localStorage.getItem('playlistSongs')+']}'
+    body:'{"uris": ['+playlistSongs+']}'
   })
   const addSongsRes = await response.json();
   console.log(addSongsRes);
