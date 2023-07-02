@@ -57,7 +57,6 @@ async function populateUI() {
 }
 
 async function getPlaylists(){
-  let playlistSongs = '';
   accessToken = localStorage.getItem('access_token');
   const response = await fetch('https://api.spotify.com/v1/me/playlists', {
     headers: {
@@ -66,12 +65,10 @@ async function getPlaylists(){
   });
   const playlists =  await response.json();
   for (let i = 0; i < playlists.items.length; i ++){
-    playlistSongs += readPlaylist(playlists.items[i].id, playlistSongs);
   }
-  return playlistSongs;
 }
 
-async function readPlaylist(playlistID, playlistSongs){
+async function readPlaylist(playlistID){
   accessToken = localStorage.getItem('access_token');
   const response = await fetch('https://api.spotify.com/v1/playlists/'+playlistID+'/tracks', {
     headers: {
@@ -91,9 +88,7 @@ async function readPlaylist(playlistID, playlistSongs){
     if (audioFeatures[0].tempo > 110 && audioFeatures[0].tempo < 125){
       songID = tracks.items[i].track.id
       console.log(songID);
-      playlistSongs += '"spotify:track:"'+songID+'", ';
     }
-    return playlistSongs;
   }
 }
 
