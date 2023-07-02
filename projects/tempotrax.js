@@ -88,7 +88,11 @@ async function readPlaylist(playlistID){
     const audioFeatures = trackTempo.audio_features;
     if (audioFeatures[0].tempo > 110 && audioFeatures[0].tempo < 125){
       songID = tracks.items[i].track.id
-      playlistSongs += songID;
+      if (playlistSongs.length == 0){
+        playlistSongs += '"spotify:track:'+songID+'"';
+      } else {
+        ',"spotify:track:'+songID+'"';
+      }
       console.log(songID);
     }
   }
