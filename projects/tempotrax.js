@@ -110,6 +110,7 @@ async function createPlaylist(songs){
 }
 
 async function addSongsToPlayList(playlistID, songs){
+  console.log('songs:' + songs);
   accessToken = localStorage.getItem('access_token');
   const response = await fetch('https://api.spotify.com/v1/playlists/'+playlistID+'/tracks',{
     method: 'POST',
