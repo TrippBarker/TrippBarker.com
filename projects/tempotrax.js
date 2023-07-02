@@ -4,7 +4,7 @@ const clientId = '8e81373db75b4fc1ab89d7e246c17c73';
 const redirectUri = 'https://www.trippbarker.com/projects/tempotrax';
 
 let codeVerifier = localStorage.getItem('code_verifier');
-let songs = '';
+let playlistSongs = '';
 
 let body = new URLSearchParams({
   grant_type: 'authorization_code',
@@ -109,10 +109,10 @@ async function createPlaylist(songs){
     body: JSON.stringify({name: "Testy Test", description: "A playlist created with TempoTrax https://www.trippbarker.com/projects/tempotraxinit", public: false})
   })
   const data = await response.json();
-  addSongsToPlayList(data.id, songs);
+  addSongsToPlaylist(data.id, songs);
 }
 
-async function addSongsToPlayList(playlistID, songs){
+async function addSongsToPlaylist(playlistID, songs){
   console.log('songs:' + songs);
   accessToken = localStorage.getItem('access_token');
   const response = await fetch('https://api.spotify.com/v1/playlists/'+playlistID+'/tracks',{
@@ -129,5 +129,5 @@ async function addSongsToPlayList(playlistID, songs){
 
 getAccessToken();
 populateUI();
-songs = getPlaylists();
-createPlaylist(songs);
+playlistSongs = getPlaylists();
+createPlaylist(playlistsongs);
