@@ -7,6 +7,8 @@ let codeVerifier = localStorage.getItem('code_verifier');
 let playlistSongs = '';
 const maxSize = 99;
 let playlistSize = 0;
+let minBPM = 110;
+let maxBPM = 125;
 
 let body = new URLSearchParams({
   grant_type: 'authorization_code',
@@ -89,7 +91,7 @@ async function readPlaylist(playlistID){
     })
     const trackTempo = await trackFeat.json();
     const audioFeatures = trackTempo.audio_features;
-    if (audioFeatures[0].tempo > 110 && audioFeatures[0].tempo < 125 && playlistSize < maxSize){
+    if (audioFeatures[0].tempo > minBPM && audioFeatures[0].tempo < maxBPM && playlistSize < maxSize){
       songID = tracks.items[i].track.id
       playlistSize++;
       if (playlistSongs.length == 0){
@@ -110,7 +112,7 @@ async function createPlaylist(){
       Authorization: 'Bearer ' + accessToken,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({name: "Testy Test", description: "A playlist created with TempoTrax https://www.trippbarker.com/projects/tempotraxinit", public: false})
+    body: JSON.stringify({name: "TempoTrax ("+minBPM+"-"+maxBPM+")", description: "A playlist created with TempoTrax https://www.trippbarker.com/projects/tempotraxinit", public: false})
   })
   const data = await response.json();
   addSongsToPlaylist(data.id);
