@@ -65,6 +65,7 @@ async function getPlaylists(){
   });
   const playlists =  await response.json();
   for (let i = 0; i < playlists.items.length; i ++){
+    readPlaylist(playlists.items[i].id);
   }
 }
 
