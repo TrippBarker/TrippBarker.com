@@ -67,6 +67,7 @@ async function getPlaylists(){
   for (let i = 0; i < playlists.items.length; i ++){
     readPlaylist(playlists.items[i].id);
   }
+  createPlaylist();
 }
 
 async function readPlaylist(playlistID){
@@ -128,4 +129,3 @@ async function addSongsToPlaylist(playlistID){
 getAccessToken();
 populateUI();
 getPlaylists();
-createPlaylist();
