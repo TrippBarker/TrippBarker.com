@@ -4,7 +4,7 @@ const clientId = '8e81373db75b4fc1ab89d7e246c17c73';
 const redirectUri = 'https://www.trippbarker.com/projects/tempotrax';
 
 let codeVerifier = localStorage.getItem('code_verifier');
-let playlistSongs = '';
+localStorage.setItem('playlistSongs', '');
 
 let body = new URLSearchParams({
   grant_type: 'authorization_code',
@@ -59,7 +59,6 @@ async function populateUI() {
 }
 
 async function getPlaylists(){
-  let songs = '';
   accessToken = localStorage.getItem('access_token');
   const response = await fetch('https://api.spotify.com/v1/me/playlists', {
     headers: {
@@ -71,10 +70,9 @@ async function getPlaylists(){
     console.log(playlists.items[i].id);
     songs = readPlaylist(playlists.items[i].id, songs);
   }
-  return songs;
 }
 
-async function readPlaylist(playlistID, songs){
+async function readPlaylist(playlistID){
   accessToken = localStorage.getItem('access_token');
   const response = await fetch('https://api.spotify.com/v1/playlists/'+playlistID+'/tracks', {
     headers: {
@@ -92,13 +90,12 @@ async function readPlaylist(playlistID, songs){
     const trackTempo = await trackFeat.json();
     const audioFeatures = trackTempo.audio_features;
     if (audioFeatures[0].tempo > 110 && audioFeatures[0].tempo < 125){
-      songs+= '"spotify:track:"'+tracks.items[i].track.id+'", ';
+      localStorage.setItem('playlistSongs', localStorage.getItem('playlistSongs' + '"spotify:track:"'+tracks.items[i].track.id+'", '));
     }
-    return songs;
   }
 }
 
-async function createPlaylist(songs){
+async function createPlaylist(){
   accessToken = localStorage.getItem('access_token');
   const response = await fetch('https://api.spotify.com/v1/users/'+localStorage.getItem('userID')+'/playlists',{
     method: 'POST',
@@ -109,11 +106,11 @@ async function createPlaylist(songs){
     body: JSON.stringify({name: "Testy Test", description: "A playlist created with TempoTrax https://www.trippbarker.com/projects/tempotraxinit", public: false})
   })
   const data = await response.json();
-  addSongsToPlaylist(data.id, songs);
+  addSongsToPlaylist(data.id);
 }
 
-async function addSongsToPlaylist(playlistID, songs){
-  console.log('songs:' + songs);
+async function addSongsToPlaylist(playlistID){
+  console.log(localStorage.getItem('playlistSongs'));
   accessToken = localStorage.getItem('access_token');
   const response = await fetch('https://api.spotify.com/v1/playlists/'+playlistID+'/tracks',{
     method: 'POST',
@@ -121,7 +118,7 @@ async function addSongsToPlaylist(playlistID, songs){
       Authorization: 'Bearer ' + accessToken,
       'Content-Type': 'application/json'
     },
-    body:'{"uris": ['+songs+']}'
+    body:'{"uris": ['+localStorage.getItem('playlistSongs')+']}'
   })
   const addSongsRes = await response.json();
   console.log(addSongsRes);
@@ -129,5 +126,5 @@ async function addSongsToPlaylist(playlistID, songs){
 
 getAccessToken();
 populateUI();
-playlistSongs = getPlaylists();
-createPlaylist(playlistsongs);
+getPlaylists();
+createPlaylist();
