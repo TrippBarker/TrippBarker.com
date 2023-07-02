@@ -90,7 +90,7 @@ async function readPlaylist(playlistID){
     const trackTempo = await trackFeat.json();
     const audioFeatures = trackTempo.audio_features;
     if (audioFeatures[0].tempo > 110 && audioFeatures[0].tempo < 125){
-      songs+= '"spotify:track:"'+tracks.items[i].track.id+', ';
+      songs+= '"spotify:track:"'+tracks.items[i].track.id+'", ';
     }
     console.log(songs);
   }
