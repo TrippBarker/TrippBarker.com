@@ -7,7 +7,6 @@ let codeVerifier = localStorage.getItem('code_verifier');
 let playlistSongs = '';
 const maxSize = 99;
 let tracks = [];
-console.log(tracks[0].name + ' ' + tracks[0].energy);
 let playlistSize = 0;
 let minBPM = 110;
 let maxBPM = 125;
