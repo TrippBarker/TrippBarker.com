@@ -97,7 +97,12 @@ async function readPlaylist(playlistID){
     const trackTempo = await trackFeat.json();
     const audioFeatures = trackTempo.audio_features;
     if (audioFeatures[0].tempo > minBPM && audioFeatures[0].tempo < maxBPM && playlistSize < maxSize){
-      songID = tracks.items[i].track.id
+      songID = tracks.items[i].track.id;
+      songName = tracks.items[i].track.name;
+      songBPM = audioFeatures[0].tempo;
+      songDanceability = audioFeatures[0].danceability;
+      songEnergy = audioFeatures[0].energy;
+      tracks.push({name: songName, id: songID, tempo: songBPM, danceability: songDanceability, energy: songEnergy})
       playlistSize++;
       if (playlistSongs.length == 0){
         playlistSongs += '"spotify:track:'+songID+'"';
@@ -134,6 +139,12 @@ async function addSongsToPlaylist(playlistID){
     body:'{"uris": ['+playlistSongs+']}'
   })
   const addSongsRes = await response.json();
+}
+
+function printSongs(){
+  for (let i = 0; i < tracks.length; i++){
+    console.log('NAME: ' + tracks[i].name + ' ID: ' + tracks[i].id + ' TEMPO: ' + tracks[i].tempo);
+  }
 }
 
 getAccessToken();
