@@ -94,12 +94,14 @@ async function readPlaylist(playlistID){
     const trackTempo = await trackFeat.json();
     const audioFeatures = trackTempo.audio_features;
     if (audioFeatures[0].tempo > minBPM && audioFeatures[0].tempo < maxBPM && playlistSize < maxSize){
+      songArtist = tracks.items[i].track.artist;
+      songAlbum = tracks.items[i].track.album;
       songID = tracks.items[i].track.id;
       songName = tracks.items[i].track.name;
       songBPM = audioFeatures[0].tempo;
       songDanceability = audioFeatures[0].danceability;
       songEnergy = audioFeatures[0].energy;
-      let trackInfo = {name: songName, id: songID, tempo: songBPM, danceability: songDanceability, energy: songEnergy};
+      let trackInfo = {name: songName, artist: songArtist, album: songAlbum, id: songID, tempo: songBPM, danceability: songDanceability, energy: songEnergy};
       allTracks.push(trackInfo);
       playlistSize++;
       if (playlistSongs.length == 0){
@@ -141,7 +143,7 @@ async function addSongsToPlaylist(playlistID){
 
 function printSongs(){
   for (let i = 0; i < allTracks.length; i++){
-    console.log('NAME: ' + allTracks[i].name + ' ID: ' + allTracks[i].id + ' TEMPO: ' + allTracks[i].tempo);
+    console.log('NAME: ' + allTracks[i].name + ' ARTIST: ' + allTracks[i].artist + ' ALBUM: ' + allTracks[i].album + ' ID: ' + allTracks[i].id + ' TEMPO: ' + allTracks[i].tempo);
   }
 }
 
