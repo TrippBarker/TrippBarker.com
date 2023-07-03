@@ -95,7 +95,7 @@ async function readPlaylist(playlistID){
     const audioFeatures = trackTempo.audio_features;
     if (audioFeatures[0].tempo > minBPM && audioFeatures[0].tempo < maxBPM && playlistSize < maxSize){
       songArtist = tracks.items[i].track.artist;
-      songAlbum = tracks.items[i].track.album;
+      songAlbum = tracks.items[i].track.album.name;
       songID = tracks.items[i].track.id;
       songName = tracks.items[i].track.name;
       songBPM = audioFeatures[0].tempo;
@@ -143,7 +143,7 @@ async function addSongsToPlaylist(playlistID){
 
 function printSongs(){
   for (let i = 0; i < allTracks.length; i++){
-    console.log('NAME: ' + allTracks[i].name + ' ARTIST: ' + allTracks[i].artist + ' ALBUM: ' + allTracks[i].album + ' ID: ' + allTracks[i].id + ' TEMPO: ' + allTracks[i].tempo);
+    console.log('NAME: ' + allTracks[i].name + ' ARTIST: ' + allTracks[i].artist + ' ALBUM: ' + allTracks[i].album + ' ID: ' + allTracks[i].id + ' TEMPO: ' + allTracks[i].tempo + ' DANCEABILITY: ' + allTracks[i].danceability + ' ENERGY: ' + allTrack[i].energy);
   }
 }
 
