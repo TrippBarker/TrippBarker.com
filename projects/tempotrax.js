@@ -7,8 +7,6 @@ let codeVerifier = localStorage.getItem('code_verifier');
 let playlistSongs = '';
 const maxSize = 99;
 let tracks = [];
-let trackInfo = {name: "TRACK NAME", id: "TRACK ID", tempo: 110, danceability: .5, energy: .9};
-tracks.push(trackInfo);
 console.log(tracks[0].name + ' ' + tracks[0].energy);
 let playlistSize = 0;
 let minBPM = 110;
@@ -102,7 +100,8 @@ async function readPlaylist(playlistID){
       songBPM = audioFeatures[0].tempo;
       songDanceability = audioFeatures[0].danceability;
       songEnergy = audioFeatures[0].energy;
-      tracks.push({name: songName, id: songID, tempo: songBPM, danceability: songDanceability, energy: songEnergy})
+      let trackInfo = {name: songName, id: songID, tempo: songBPM, danceability: songDanceability, energy: songEnergy};
+      tracks.push(trackInfo);
       playlistSize++;
       if (playlistSongs.length == 0){
         playlistSongs += '"spotify:track:'+songID+'"';
