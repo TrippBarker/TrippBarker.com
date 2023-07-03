@@ -6,7 +6,7 @@ const redirectUri = 'https://www.trippbarker.com/projects/tempotrax';
 let codeVerifier = localStorage.getItem('code_verifier');
 let playlistSongs = '';
 const maxSize = 99;
-let tracks = [];
+let allTracks = [];
 let playlistSize = 0;
 let minBPM = 110;
 let maxBPM = 125;
@@ -100,7 +100,7 @@ async function readPlaylist(playlistID){
       songDanceability = audioFeatures[0].danceability;
       songEnergy = audioFeatures[0].energy;
       let trackInfo = {name: songName, id: songID, tempo: songBPM, danceability: songDanceability, energy: songEnergy};
-      tracks.push(trackInfo);
+      allTracks.push(trackInfo);
       playlistSize++;
       if (playlistSongs.length == 0){
         playlistSongs += '"spotify:track:'+songID+'"';
@@ -140,8 +140,8 @@ async function addSongsToPlaylist(playlistID){
 }
 
 function printSongs(){
-  for (let i = 0; i < tracks.length; i++){
-    console.log('NAME: ' + tracks[i].name + ' ID: ' + tracks[i].id + ' TEMPO: ' + tracks[i].tempo);
+  for (let i = 0; i < allTracks.length; i++){
+    console.log('NAME: ' + allTracks[i].name + ' ID: ' + allTracks[i].id + ' TEMPO: ' + allTracks[i].tempo);
   }
 }
 
