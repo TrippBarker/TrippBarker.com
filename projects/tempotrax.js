@@ -1,3 +1,8 @@
+// HTML elements live here
+const app = document.querySelector('#application');
+const infoBtn = document.querySelector('#info');
+const infoBox = document.querySelector('#infoBox');
+
 const urlParams = new URLSearchParams(window.location.search);
 let code = urlParams.get('code');
 const clientId = '8e81373db75b4fc1ab89d7e246c17c73';
@@ -18,6 +23,12 @@ let body = new URLSearchParams({
   client_id: clientId,
   code_verifier: codeVerifier
 });
+
+// Function called to make the information box visible
+function displayInfo(e){
+  infoBox.classList.toggle("visible");
+  app.classList.toggle("dimmed");
+}
 
 async function getAccessToken(){
   const response = fetch('https://accounts.spotify.com/api/token', {
@@ -147,6 +158,7 @@ function printSongs(){
   }
 }
 
-getAccessToken();
-populateUI();
-getPlaylists();
+
+// Event listeners live here
+infoBtn.addEventListener('click', displayInfo);
+infoBox.addEventListener('click', displayInfo);

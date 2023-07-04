@@ -2,23 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="ttStyle.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TempoTrax</title>
-    <script src="tempotrax.js"></script>
 </head>
 <body>
-    <h1>Display your Spotify profile data</h1>
-
-    <section id="profile">
-    <h2>Logged in as <span id="displayName"></span></h2>
-    <span id="avatar"></span>
-    <ul>
-        <li>User ID: <span id="id"></span></li>
-        <li>Email: <span id="email"></span></li>
-        <li>Spotify URI: <a id="uri" href="#"></a></li>
-        <li>Link: <a id="url" href="#"></a></li>
-        <li>Profile Image: <span id="imgUrl"></span></li>
-    </ul>
-    </section>
+    <div id="header">
+        <button id="info">i</button>
+    </div>
+    <div id="infoBox">
+        <div id="infoWords">
+            <p>
+                Thank you for checking out my project! This application will create a Spotify playlist that consists of songs within an user specified BPM range.
+                Use the sliders to set 'danceablity', 'energy' and min/max 'tempo' parameters and the playlist will dinamically adjust to the settings. Once you
+                find a playlist you like, click 'generate playlist' and the playlist will be sent to your Spotify account. You will be prompted for a title for 
+                your new playlist, if one is not provided TempoTrax will give a default name.
+            </p>
+            <p>
+                Be aware that I make no promises this will work on mobile devices, in fact, I am certain features will not behave correctly on mobile devices, for
+                best experience, please use a desktop computer with a modern browser.
+            </p>
+            <p>
+                I can be found at my GitHub: <a href="https://github.com/TrippBarker">TrippBarker</a>
+            </p>
+        </div>
+    </div>
+    <div id="application">
+    </div>
+    <script src="tempotrax.js"></script>
 </body>
 </html>
