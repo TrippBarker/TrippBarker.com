@@ -2,6 +2,14 @@
 const app = document.querySelector('#application');
 const infoBtn = document.querySelector('#info');
 const infoBox = document.querySelector('#infoBox');
+const maxTempoSLDR = document.querySelector('#maxTempoSLDR');
+const minTempoSLDR = document.querySelector('#minTempoSLDR');
+const danceSLDR = document.querySelector('#danceSLDR');
+const energySLDR = document.querySelector('#energySLDR');
+const maxTempoVal = document.querySelector('#maxTempoVal');
+const minTempoVal = document.querySelector('#minTempoVal');
+const danceVal = document.querySelector('#danceVal');
+const energyVal = document.querySelector('#energyVal');
 
 const urlParams = new URLSearchParams(window.location.search);
 let code = urlParams.get('code');
@@ -24,10 +32,24 @@ let body = new URLSearchParams({
   code_verifier: codeVerifier
 });
 
+
+// EVENT HANDLERS
 // Function called to make the information box visible
 function displayInfo(e){
   infoBox.classList.toggle("visible");
   app.classList.toggle("dimmed");
+}
+
+function updateVal(e){
+  if(e.srcElement.id == 'maxTempoSLDR'){
+    maxTempoVal.innerHTML = e.srcElement.value;
+  } else if(e.srcElement.id == 'minTempoSLDR'){
+    minTempoVal.innerHTML = e.srcElement.value;
+  } else if (e.srcElement.id == 'danceSLDR'){
+    danceVal.innerHTML = (e.srcElement.value * 0.01).toFixed(2);
+  } else if (e.srcElement.id == 'energySLDR'){
+    energyVal.innerHTML = (e.srcElement.value * 0.01).toFixed(2);
+  }
 }
 
 async function getAccessToken(){
@@ -162,3 +184,7 @@ function printSongs(){
 // Event listeners live here
 infoBtn.addEventListener('click', displayInfo);
 infoBox.addEventListener('click', displayInfo);
+maxTempoSLDR.addEventListener('input', updateVal);
+minTempoSLDR.addEventListener('input', updateVal);
+danceSLDR.addEventListener('input', updateVal);
+energySLDR.addEventListener('input', updateVal);
