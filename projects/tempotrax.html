@@ -28,6 +28,28 @@
         </div>
     </div>
     <div id="application">
+        <div id ="sliders">
+            <div id="maxTempoCont" class="sliderCont">
+                <h1>MAX TEMPO:</h1>
+                <input type="range" min="1" max="200" class="slider" id="maxTempoSLDR">
+                <h1 id="maxTempoVal"></h1>
+            </div>
+            <div id="minTempoCont" class="sliderCont">
+                <h1>MIN TEMPO:</h1>
+                <input type="range" min="1" max="200" class="slider" id="minTempoSLDR">
+                <h1 id="minTempoVal"></h1>
+            </div>
+            <div id="danceCont" class="sliderCont">
+                <h1>DANCEABILITY:</h1>
+                <input type="range" min="1" max="100" class="slider" id="danceSLDR">
+                <h1 id="danceVal"></h1>
+            </div>
+            <div id="energyCont" class="sliderCont">
+                <h1>ENERGY:</h1>
+                <input type="range" min="1" max="100" class="slider" id="energySLDR">
+                <h1 id="energyVal"></h1>
+            </div>
+        </div>
     </div>
     <script src="tempotrax.js"></script>
 </body>

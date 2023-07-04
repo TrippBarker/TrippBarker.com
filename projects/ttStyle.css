@@ -67,3 +67,35 @@ button:active {
 .dimmed {
     opacity: 50%;
 }
+
+#sliders {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.sliderCont {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  border-radius: 500px;
+  width: 500px;
+  height: 50px;
+  background: linear-gradient(135deg, #ff0000 0%, #d04e0e 50%, #ea0d0d 100%);
+}
+
+.slider::-webkit-slider-thumb {
+-webkit-appearance: none; /* Override default look */
+  width: 50px; /* Set a specific slider handle width */
+  height: 50px; /* Slider handle height */
+  border-radius: 500px;
+  background: #fa7575; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
