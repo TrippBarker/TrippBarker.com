@@ -278,17 +278,22 @@ function printSongs(){
 }
 
 function displayTracks(){
-  const trackEntry = document.createElement("tr");
-  const trackTitle = document.createElement("td");
-  const trackArtist = document.createElement("td");
-  const trackBPM = document.createElement("td");
-  trackEntry.appendChild(trackTitle);
-  trackTitle.textContent = "Island in the sun";
-  trackEntry.appendChild(trackArtist);
-  trackArtist.textContent = "Weezer";
-  trackEntry.append(trackBPM);
-  trackBPM.textContent = "115";
-  trackTBL.appendChild(trackEntry);
+  for (let i = 0; i < allTracks.length; i++){
+    const trackEntry = document.createElement("tr");
+    const trackTitle = document.createElement("td");
+    const trackArtist = document.createElement("td");
+    const trackAlbum = document.createElement("td");
+    const trackBPM = document.createElement("td");
+    trackEntry.appendChild(trackTitle);
+    trackTitle.textContent = allTracks[i].name;
+    trackEntry.appendChild(trackArtist);
+    trackArtist.textContent = allTracks[i].artis;
+    trackEntry.appendChild(trackAlbum);
+    trackAlbum.textContent = allTracks[i].album;
+    trackEntry.append(trackBPM);
+    trackBPM.textContent = allTracks[i].tempo;
+    trackTBL.appendChild(trackEntry);
+  }
 }
 
 
