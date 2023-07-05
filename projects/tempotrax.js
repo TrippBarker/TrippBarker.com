@@ -165,15 +165,15 @@ async function readTrack(rawTracks){
     }
   }
   console.log(trackIDS);
-  accessToken = localStorage.getItem('access_token');
-  const trackFeat = await fetch('https://api.spotify.com/v1/audio-features?ids='+trackIDS,{
-    method: 'GET',
-    headers: {
-      Authorization: 'Bearer ' + accessToken
-    }
-  })
-  const allTrackFeats = await trackFeat.json();
-  console.log(allTrackFeats);
+  //accessToken = localStorage.getItem('access_token');
+  //const trackFeat = await fetch('https://api.spotify.com/v1/audio-features?ids='+trackIDS,{
+  //  method: 'GET',
+  //  headers: {
+  //    Authorization: 'Bearer ' + accessToken
+  //  }
+  //})
+  //const allTrackFeats = await trackFeat.json();
+  //console.log(allTrackFeats);
   //const audioFeatures = trackTempo.audio_features;
   //songArtist = trackInfo.artists[0].name;
   //songAlbum = trackInfo.album.name;
