@@ -115,7 +115,6 @@ async function populateUI() {
 }
 
 async function getUsersTracks(){
-  playlistSize = 0;
   accessToken = localStorage.getItem('access_token');
   const response = await fetch('https://api.spotify.com/v1/me/tracks?offset='+userTrackOffset+'&limit=50', {
     method: 'GET',
@@ -124,6 +123,7 @@ async function getUsersTracks(){
     }
   });
   const usersTracks =  await response.json();
+  userTrackOffset += 50;
   for (let i = 0; i < usersTracks.items.length; i++){
     playlistSize++;
     console.log(usersTracks.items[i].track.name + " " + playlistSize);
