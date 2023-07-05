@@ -19,10 +19,10 @@ body{
 #info {
     background-color: whitesmoke;
     color: black;
-    width: 5rem;
-    height: 5rem;
+    width: 3rem;
+    height: 3rem;
     border-radius: 50%;
-    font-size: 4rem;
+    font-size: 2rem;
     margin-left: auto;
     margin-right: 5rem;
     z-index: 102;
