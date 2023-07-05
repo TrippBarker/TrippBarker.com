@@ -25,8 +25,12 @@ let playlistSongs = '';
 const maxSize = 99;
 let allTracks = [];
 let playlistSize = 0;
-let minBPM = 110;
-let maxBPM = 125;
+let minBPM = 1;
+let maxBPM = 200;
+let minDanceability = 0;
+let maxDanceability = 1;
+let minEnergy = 0;
+let maxEnergy = 1;
 
 let body = new URLSearchParams({
   grant_type: 'authorization_code',
@@ -46,16 +50,22 @@ function displayInfo(e){
 
 function updateVal(e){
   if(e.srcElement.id == 'maxTempoSLDR'){
+    maxBPM = e.srcElement.value;
     maxTempoVal.innerHTML = e.srcElement.value;
   } else if(e.srcElement.id == 'minTempoSLDR'){
+    minBPM = e.srcElement.value;
     minTempoVal.innerHTML = e.srcElement.value;
   } else if (e.srcElement.id == 'maxDanceSLDR'){
+    maxDanceability = (e.srcElement.value * 0.01).toFixed(2);
     maxDanceVal.innerHTML = (e.srcElement.value * 0.01).toFixed(2);
   } else if (e.srcElement.id == 'minDanceSLDR'){
+    minDanceability -= (e.srcElement.value * 0.01).toFixed(2);
     minDanceVal.innerHTML = (e.srcElement.value * 0.01).toFixed(2);
   } else if (e.srcElement.id == 'maxEnergySLDR'){
+    maxEnergy = (e.srcElement.value * 0.01).toFixed(2);
     maxEnergyVal.innerHTML = (e.srcElement.value * 0.01).toFixed(2);
   } else if (e.srcElement.id == 'minEnergySLDR'){
+    minEnergy = (e.srcElement.value * 0.01).toFixed(2);
     minEnergyVal.innerHTML = (e.srcElement.value * 0.01).toFixed(2);
   }
 }
@@ -134,7 +144,13 @@ async function readPlaylist(playlistID){
     })
     const trackTempo = await trackFeat.json();
     const audioFeatures = trackTempo.audio_features;
-    if (audioFeatures[0].tempo > minBPM && audioFeatures[0].tempo < maxBPM && playlistSize < maxSize){
+    if (audioFeatures[0].tempo > minBPM && 
+        audioFeatures[0].tempo < maxBPM && 
+        audioFeatures[0].danceability > minDanceability &&
+        audioFeatures[0].danceability < maxDanceability &&
+        audioFeatures[0].energy > minEnergy &&
+        audioFeatures[0].energy < maxEnergy &&
+        playlistSize < maxSize){
       songArtist = tracks.items[i].track.artist;
       songAlbum = tracks.items[i].track.album.name;
       songID = tracks.items[i].track.id;
