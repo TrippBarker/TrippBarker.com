@@ -191,6 +191,13 @@ async function readTrack(trackInfo){
   songID = trackInfo.id;
   songName = trackInfo.name;
   songBPM = audioFeatures[0].tempo;
+  if (songBPM > maxBPM){
+    maxTempoSLDR.max = Math.ceil(songBPM);
+    minTempoSLDR.max = Math.ceil(songBPM);
+  } else if (songBPM < minBPM){
+    maxTempoSLDR.min = Math.floor(songBPM);
+    minTempoSLDR.min = Math.floor(songBPM);
+  }
   songDanceability = audioFeatures[0].danceability;
   songEnergy = audioFeatures[0].energy;
   let trackEntry = {name: songName, artist: songArtist, album: songAlbum, id: songID, tempo: songBPM, danceability: songDanceability, energy: songEnergy};
