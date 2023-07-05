@@ -157,21 +157,15 @@ async function getUsersTracks(){
   userTrackOffset += 50;
   for (let i = 0; i < usersTracks.items.length; i++){
     console.log(usersTracks.items[i].track);
-    readTrack(usersTracks.items[i].track.id);
+    readTrack(usersTracks.items[i].track);
   }
   if (usersTracks.items.length == 50){
     getUsersTracks();
   }
 }
 
-async function readTrack(trackID){
+async function readTrack(trackInfo){
   accessToken = localStorage.getItem('access_token');
-  const response = await fetch('https://api.spotify.com/v1/tracks/'+trackID, {
-    headers: {
-      Authorization: 'Bearer ' + accessToken
-    }
-  })
-  trackInfo = await response.json();
   const trackFeat = await fetch('https://api.spotify.com/v1/audio-features?ids='+trackID,{
     method: 'GET',
     headers: {
