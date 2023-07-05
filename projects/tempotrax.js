@@ -31,6 +31,7 @@ let minDanceability = 0;
 let maxDanceability = 1;
 let minEnergy = 0;
 let maxEnergy = 1;
+let userTrackOffset = 0;
 
 let body = new URLSearchParams({
   grant_type: 'authorization_code',
@@ -116,7 +117,7 @@ async function populateUI() {
 async function getUsersTracks(){
   playlistSize = 0;
   accessToken = localStorage.getItem('access_token');
-  const response = await fetch('https://api.spotify.com/v1/me/tracks', {
+  const response = await fetch('https://api.spotify.com/v1/me/tracks?offset='+userTrackOffset+'&limit=50', {
     method: 'GET',
     headers: {
       Authorization: 'Bearer ' + accessToken
