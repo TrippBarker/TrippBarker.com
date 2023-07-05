@@ -184,12 +184,18 @@ async function readTrack(trackInfo){
   songEnergy = audioFeatures[0].energy;
   let trackEntry = {name: songName, artist: songArtist, album: songAlbum, id: songID, tempo: songBPM, danceability: songDanceability, energy: songEnergy};
   allTracks.push(trackEntry);
-  if (audioFeatures[0].tempo > minBPM && 
-      audioFeatures[0].tempo < maxBPM && 
-      audioFeatures[0].danceability > minDanceability &&
-      audioFeatures[0].danceability < maxDanceability &&
-      audioFeatures[0].energy > minEnergy &&
-      audioFeatures[0].energy < maxEnergy &&
+}
+
+function getCurrentTracks(){
+  currentTracks = [];
+  playlistSize = 0;
+  for (let i = 0; i < allTracks.length; i ++){
+    if (allTracks[i].tempo > minBPM && 
+      allTracks[i].tempo < maxBPM && 
+      allTracks[i].danceability > minDanceability &&
+      allTracks[i].danceability < maxDanceability &&
+      allTracks[i].energy > minEnergy &&
+      allTracks[i].energy < maxEnergy &&
       playlistSize < maxSize){
     currentTracks.push(trackEntry);
     playlistSize++;
@@ -198,7 +204,7 @@ async function readTrack(trackInfo){
     } else {
       playlistSongs += ',"spotify:track:'+songID+'"';
     }
-    console.log(songID + ' ' + playlistSize);
+  }
   }
 }
 
