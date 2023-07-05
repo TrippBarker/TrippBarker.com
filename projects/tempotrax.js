@@ -278,6 +278,9 @@ function printSongs(){
 }
 
 function displayTracks(){
+  while (trackTBL.firstChild) {
+    trackTBL.removeChild(trackTBL.firstChild);
+  }
   for (let i = 0; i < allTracks.length; i++){
     const trackEntry = document.createElement("tr");
     const trackTitle = document.createElement("td");
