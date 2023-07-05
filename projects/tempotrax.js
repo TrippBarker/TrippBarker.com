@@ -200,50 +200,6 @@ async function readTrack(trackInfo){
   }
 }
 
-async function readPlaylist(playlistID){
-  accessToken = localStorage.getItem('access_token');
-  const response = await fetch('https://api.spotify.com/v1/playlists/'+playlistID+'/tracks', {
-    headers: {
-      Authorization: 'Bearer ' + accessToken
-    }
-  })
-  const tracks = await response.json();
-  for (let i = 0; i < tracks.items.length; i++){
-    const trackFeat = await fetch('https://api.spotify.com/v1/audio-features?ids=' + tracks.items[i].track.id,{
-      method: 'GET',
-      headers: {
-        Authorization: 'Bearer ' + accessToken
-      }
-    })
-    const trackTempo = await trackFeat.json();
-    const audioFeatures = trackTempo.audio_features;
-    if (audioFeatures[0].tempo > minBPM && 
-        audioFeatures[0].tempo < maxBPM && 
-        audioFeatures[0].danceability > minDanceability &&
-        audioFeatures[0].danceability < maxDanceability &&
-        audioFeatures[0].energy > minEnergy &&
-        audioFeatures[0].energy < maxEnergy &&
-        playlistSize < maxSize){
-      songArtist = tracks.items[i].track.artist;
-      songAlbum = tracks.items[i].track.album.name;
-      songID = tracks.items[i].track.id;
-      songName = tracks.items[i].track.name;
-      songBPM = audioFeatures[0].tempo;
-      songDanceability = audioFeatures[0].danceability;
-      songEnergy = audioFeatures[0].energy;
-      let trackInfo = {name: songName, artist: songArtist, album: songAlbum, id: songID, tempo: songBPM, danceability: songDanceability, energy: songEnergy};
-      allTracks.push(trackInfo);
-      playlistSize++;
-      if (playlistSongs.length == 0){
-        playlistSongs += '"spotify:track:'+songID+'"';
-      } else {
-        playlistSongs += ',"spotify:track:'+songID+'"';
-      }
-      console.log(songID + ' ' + playlistSize);
-    }
-  }
-}
-
 async function createPlaylist(){
   accessToken = localStorage.getItem('access_token');
   const response = await fetch('https://api.spotify.com/v1/users/'+localStorage.getItem('userID')+'/playlists',{
@@ -278,9 +234,23 @@ function printSongs(){
 }
 
 function displayTracks(){
-  while (trackTBL.firstChild) {
+  while (trackTBL.firstChild.firstChild) {
     trackTBL.removeChild(trackTBL.firstChild);
   }
+  const trackHeader = document.createElement("tr");
+  const titleTH = document.createElement("th");
+  const artistTH = document.createElement("th");
+  const albumTH = document.createElement("th");
+  const bpmTH = document.createElement("th");
+  trackHeader.appendChild(titleTH);
+  trackTitle.textContent = 'TITLE';
+  trackEntry.appendChild(artistTH);
+  trackArtist.textContent = 'ARTIST';
+  trackEntry.appendChild(albumTH);
+  trackAlbum.textContent = 'ALBUM';
+  trackEntry.append(bpmTH);
+  trackBPM.textContent = 'TEMPO';
+  trackTBL.appendChild(trackHeader);
   for (let i = 0; i < allTracks.length; i++){
     const trackEntry = document.createElement("tr");
     const trackTitle = document.createElement("td");
@@ -290,7 +260,7 @@ function displayTracks(){
     trackEntry.appendChild(trackTitle);
     trackTitle.textContent = allTracks[i].name;
     trackEntry.appendChild(trackArtist);
-    trackArtist.textContent = allTracks[i].artis;
+    trackArtist.textContent = allTracks[i].artist;
     trackEntry.appendChild(trackAlbum);
     trackAlbum.textContent = allTracks[i].album;
     trackEntry.append(trackBPM);
