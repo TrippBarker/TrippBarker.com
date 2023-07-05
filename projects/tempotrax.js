@@ -128,6 +128,9 @@ async function getUsersTracks(){
     playlistSize++;
     console.log(usersTracks.items[i].track.name + " " + playlistSize);
   }
+  if (usersTracks.items.length == 50){
+    getUsersTracks();
+  }
 }
 
 async function getPlaylists(){
