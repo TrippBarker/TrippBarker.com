@@ -234,7 +234,7 @@ function printSongs(){
 }
 
 function displayTracks(){
-  while (trackTBL.firstChild.firstChild) {
+  while (trackTBL.firstChild) {
     trackTBL.removeChild(trackTBL.firstChild);
   }
   const trackHeader = document.createElement("tr");
@@ -243,13 +243,13 @@ function displayTracks(){
   const albumTH = document.createElement("th");
   const bpmTH = document.createElement("th");
   trackHeader.appendChild(titleTH);
-  trackTitle.textContent = 'TITLE';
-  trackEntry.appendChild(artistTH);
-  trackArtist.textContent = 'ARTIST';
-  trackEntry.appendChild(albumTH);
-  trackAlbum.textContent = 'ALBUM';
-  trackEntry.append(bpmTH);
-  trackBPM.textContent = 'TEMPO';
+  titleTH.textContent = 'TITLE';
+  trackHeader.appendChild(artistTH);
+  artistTH.textContent = 'ARTIST';
+  trackHeader.appendChild(albumTH);
+  albumTH.textContent = 'ALBUM';
+  trackHeader.append(bpmTH);
+  bpmTH.textContent = 'TEMPO';
   trackTBL.appendChild(trackHeader);
   for (let i = 0; i < allTracks.length; i++){
     const trackEntry = document.createElement("tr");
