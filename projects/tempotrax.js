@@ -132,8 +132,6 @@ async function getAccessToken(){
   }).catch(error => {
       console.error('Error:', error);
   });
-  // Get all of Users liked tracks
-  getUsersTracks();
 }
 
 // Collect User's liked tracks and store in list
