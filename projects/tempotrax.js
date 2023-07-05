@@ -24,6 +24,7 @@ const redirectUri = 'https://www.trippbarker.com/projects/tempotrax';
 let codeVerifier = localStorage.getItem('code_verifier');
 let playlistSongs = '';
 const maxSize = 100;
+let currentTracks = [];
 let allTracks = [];
 let playlistSize = 0;
 let minBPM = 1;
@@ -174,6 +175,15 @@ async function readTrack(trackInfo){
   })
   const trackTempo = await trackFeat.json();
   const audioFeatures = trackTempo.audio_features;
+  songArtist = trackInfo.artists[0].name;
+  songAlbum = trackInfo.album.name;
+  songID = trackInfo.id;
+  songName = trackInfo.name;
+  songBPM = audioFeatures[0].tempo;
+  songDanceability = audioFeatures[0].danceability;
+  songEnergy = audioFeatures[0].energy;
+  let trackEntry = {name: songName, artist: songArtist, album: songAlbum, id: songID, tempo: songBPM, danceability: songDanceability, energy: songEnergy};
+  allTracks.push(trackEntry);
   if (audioFeatures[0].tempo > minBPM && 
       audioFeatures[0].tempo < maxBPM && 
       audioFeatures[0].danceability > minDanceability &&
@@ -181,15 +191,7 @@ async function readTrack(trackInfo){
       audioFeatures[0].energy > minEnergy &&
       audioFeatures[0].energy < maxEnergy &&
       playlistSize < maxSize){
-    songArtist = trackInfo.artists[0].name;
-    songAlbum = trackInfo.album.name;
-    songID = trackInfo.id;
-    songName = trackInfo.name;
-    songBPM = audioFeatures[0].tempo;
-    songDanceability = audioFeatures[0].danceability;
-    songEnergy = audioFeatures[0].energy;
-    let trackEntry = {name: songName, artist: songArtist, album: songAlbum, id: songID, tempo: songBPM, danceability: songDanceability, energy: songEnergy};
-    allTracks.push(trackEntry);
+    currentTracks.push(trackEntry);
     playlistSize++;
     if (playlistSongs.length == 0){
       playlistSongs += '"spotify:track:'+songID+'"';
@@ -228,9 +230,8 @@ async function addSongsToPlaylist(playlistID){
 }
 
 function printSongs(){
-  for (let i = 0; i < allTracks.length; i++){
-    console.log('NAME: ' + allTracks[i].name + ' ARTIST: ' + allTracks[i].artist + ' ALBUM: ' + allTracks[i].album + ' ID: ' + allTracks[i].id + ' TEMPO: ' + allTracks[i].tempo + ' DANCEABILITY: ' + allTracks[i].danceability + ' ENERGY: ' + allTracks[i].energy);
-  }
+  console.log(allTracks);
+  console.log(currentTracks);
 }
 
 function displayTracks(){
@@ -251,20 +252,20 @@ function displayTracks(){
   trackHeader.append(bpmTH);
   bpmTH.textContent = 'TEMPO';
   trackTBL.appendChild(trackHeader);
-  for (let i = 0; i < allTracks.length; i++){
+  for (let i = 0; i < currentTracks.length; i++){
     const trackEntry = document.createElement("tr");
     const trackTitle = document.createElement("td");
     const trackArtist = document.createElement("td");
     const trackAlbum = document.createElement("td");
     const trackBPM = document.createElement("td");
     trackEntry.appendChild(trackTitle);
-    trackTitle.textContent = allTracks[i].name;
+    trackTitle.textContent = currentTracks[i].name;
     trackEntry.appendChild(trackArtist);
-    trackArtist.textContent = allTracks[i].artist;
+    trackArtist.textContent = currentTracks[i].artist;
     trackEntry.appendChild(trackAlbum);
-    trackAlbum.textContent = allTracks[i].album;
+    trackAlbum.textContent = currentTracks[i].album;
     trackEntry.append(trackBPM);
-    trackBPM.textContent = allTracks[i].tempo;
+    trackBPM.textContent = currentTracks[i].tempo;
     trackTBL.appendChild(trackEntry);
   }
 }
