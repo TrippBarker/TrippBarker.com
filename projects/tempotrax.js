@@ -4,12 +4,16 @@ const infoBtn = document.querySelector('#info');
 const infoBox = document.querySelector('#infoBox');
 const maxTempoSLDR = document.querySelector('#maxTempoSLDR');
 const minTempoSLDR = document.querySelector('#minTempoSLDR');
-const danceSLDR = document.querySelector('#danceSLDR');
-const energySLDR = document.querySelector('#energySLDR');
+const maxDanceSLDR = document.querySelector('#maxDanceSLDR');
+const minDanceSLDR = document.querySelector('#minDanceSLDR');
+const maxEnergySLDR = document.querySelector('#maxEnergySLDR');
+const minEnergySLDR = document.querySelector('#minEnergySLDR');
 const maxTempoVal = document.querySelector('#maxTempoVal');
 const minTempoVal = document.querySelector('#minTempoVal');
-const danceVal = document.querySelector('#danceVal');
-const energyVal = document.querySelector('#energyVal');
+const maxDanceVal = document.querySelector('#maxDanceVal');
+const minDanceVal = document.querySelector('#minDanceVal');
+const maxEnergyVal = document.querySelector('#maxEnergyVal');
+const minEnergyVal = document.querySelector('#minEnergyVal');
 
 const urlParams = new URLSearchParams(window.location.search);
 let code = urlParams.get('code');
@@ -45,10 +49,14 @@ function updateVal(e){
     maxTempoVal.innerHTML = e.srcElement.value;
   } else if(e.srcElement.id == 'minTempoSLDR'){
     minTempoVal.innerHTML = e.srcElement.value;
-  } else if (e.srcElement.id == 'danceSLDR'){
-    danceVal.innerHTML = (e.srcElement.value * 0.01).toFixed(2);
-  } else if (e.srcElement.id == 'energySLDR'){
-    energyVal.innerHTML = (e.srcElement.value * 0.01).toFixed(2);
+  } else if (e.srcElement.id == 'maxDanceSLDR'){
+    maxDanceVal.innerHTML = (e.srcElement.value * 0.01).toFixed(2);
+  } else if (e.srcElement.id == 'minDanceSLDR'){
+    minDanceVal.innerHTML = (e.srcElement.value * 0.01).toFixed(2);
+  } else if (e.srcElement.id == 'maxEnergySLDR'){
+    maxEnergyVal.innerHTML = (e.srcElement.value * 0.01).toFixed(2);
+  } else if (e.srcElement.id == 'minEnergySLDR'){
+    minEnergyVal.innerHTML = (e.srcElement.value * 0.01).toFixed(2);
   }
 }
 
@@ -186,5 +194,7 @@ infoBtn.addEventListener('click', displayInfo);
 infoBox.addEventListener('click', displayInfo);
 maxTempoSLDR.addEventListener('input', updateVal);
 minTempoSLDR.addEventListener('input', updateVal);
-danceSLDR.addEventListener('input', updateVal);
-energySLDR.addEventListener('input', updateVal);
+maxDanceSLDR.addEventListener('input', updateVal);
+minDanceSLDR.addEventListener('input', updateVal);
+maxEnergySLDR.addEventListener('input', updateVal);
+minEnergySLDR.addEventListener('input', updateVal);

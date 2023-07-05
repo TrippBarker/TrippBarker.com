@@ -80,11 +80,12 @@ button:active {
     display: flex;
     flex-direction: row;
     margin: 1rem;
+    align-items: center;
     justify-content: space-between;
 }
 
 .sliderCont h1 {
-    width: 15rem;
+    width: 20rem;
     padding-left: 1rem;
     padding-right: 1rem;
 }
@@ -93,16 +94,16 @@ button:active {
   -webkit-appearance: none;  /* Override default CSS styles */
   appearance: none;
   border-radius: 50rem;
-  width: 50rem;
-  height: 5rem;
+  width: 45rem;
+  height: 4rem;
   background: linear-gradient(135deg, #ff0000 0%, #d04e0e 50%, #ea0d0d 100%);
 }
 
 .slider::-webkit-slider-thumb {
--webkit-appearance: none; /* Override default look */
-  width: 5rem; /* Set a specific slider handle width */
-  height: 5rem; /* Slider handle height */
+-webkit-appearance: none;
+  width: 4rem;
+  height: 4rem;
   border-radius: 50rem;
-  background: #fa7575; /* Green background */
-  cursor: pointer; /* Cursor on hover */
+  background: #fa7575;
+  cursor: pointer;
 }
