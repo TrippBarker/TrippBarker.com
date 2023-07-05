@@ -101,6 +101,7 @@ function updateVal(e){
       maxEnergyVal.innerHTML = (e.srcElement.value * 0.01).toFixed(2);
     }
   }
+  getCurrentTracks();
 }
 
 async function getAccessToken(){
@@ -197,15 +198,16 @@ function getCurrentTracks(){
       allTracks[i].energy > minEnergy &&
       allTracks[i].energy < maxEnergy &&
       playlistSize < maxSize){
-    currentTracks.push(trackEntry);
-    playlistSize++;
-    if (playlistSongs.length == 0){
-      playlistSongs += '"spotify:track:'+songID+'"';
-    } else {
-      playlistSongs += ',"spotify:track:'+songID+'"';
-    }
+        currentTracks.push(allTracks[i]);
+        playlistSize++;
+        if (playlistSongs.length == 0){
+          playlistSongs += '"spotify:track:'+songID+'"';
+        } else {
+          playlistSongs += ',"spotify:track:'+songID+'"';
+        }
+      }
   }
-  }
+  displayTracks();
 }
 
 async function createPlaylist(){
