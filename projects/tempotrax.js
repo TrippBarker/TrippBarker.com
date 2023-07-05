@@ -128,7 +128,6 @@ async function getAccessToken(){
       console.error('Error:', error);
   });
   getUsersTracks();
-  activateBTN();
 }
 
 async function populateUI() {
@@ -173,9 +172,8 @@ async function getUsersTracks(){
     getUsersTracks();
   } else {
     getCurrentTracks();
-
   }
-
+  activateBTN();
 }
 
 async function readTrack(trackInfo){
@@ -214,9 +212,9 @@ function getCurrentTracks(){
         currentTracks.push(allTracks[i]);
         playlistSize++;
         if (playlistSongs.length == 0){
-          playlistSongs += '"spotify:track:'+songID+'"';
+          playlistSongs += '"spotify:track:'+allTracks[i].id+'"';
         } else {
-          playlistSongs += ',"spotify:track:'+songID+'"';
+          playlistSongs += ',"spotify:track:'+allTracks[i].id+'"';
         }
       }
   }

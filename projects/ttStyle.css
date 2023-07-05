@@ -1,3 +1,7 @@
+html {
+    font-size: medium;
+}
+
 *{
     color: black;
     font-family: monospace;
