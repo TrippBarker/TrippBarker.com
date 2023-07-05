@@ -14,6 +14,7 @@ const maxDanceVal = document.querySelector('#maxDanceVal');
 const minDanceVal = document.querySelector('#minDanceVal');
 const maxEnergyVal = document.querySelector('#maxEnergyVal');
 const minEnergyVal = document.querySelector('#minEnergyVal');
+const trackTBL = document.querySelector('#trackTBL');
 
 const urlParams = new URLSearchParams(window.location.search);
 let code = urlParams.get('code');
@@ -155,8 +156,7 @@ async function getUsersTracks(){
   const usersTracks =  await response.json();
   userTrackOffset += 50;
   for (let i = 0; i < usersTracks.items.length; i++){
-    playlistSize++;
-    console.log(usersTracks.items[i].track.name + " " + playlistSize);
+    readPlaylist(usersTracks.items[i].id);
   }
   if (usersTracks.items.length == 50){
     getUsersTracks();
@@ -252,6 +252,20 @@ function printSongs(){
   for (let i = 0; i < allTracks.length; i++){
     console.log('NAME: ' + allTracks[i].name + ' ARTIST: ' + allTracks[i].artist + ' ALBUM: ' + allTracks[i].album + ' ID: ' + allTracks[i].id + ' TEMPO: ' + allTracks[i].tempo + ' DANCEABILITY: ' + allTracks[i].danceability + ' ENERGY: ' + allTracks[i].energy);
   }
+}
+
+function displayTracks(){
+  const trackEntry = document.createElement("tr");
+  const trackTitle = document.createElement("td");
+  const trackArtist = document.createElement("td");
+  const trackBPM = document.createElement("td");
+  trackEntry.appendChild(trackTitle);
+  trackTitle.textContent = "Island in the sun";
+  trackEntry.appendChild(trackArtist);
+  trackArtist.textContent = "Weezer";
+  trackEntry.append(trackBPM);
+  trackBPM.textContent = "115";
+  trackTBL.appendChild(trackEntry);
 }
 
 
