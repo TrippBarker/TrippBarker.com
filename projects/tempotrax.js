@@ -137,24 +137,24 @@ async function getAccessToken(){
 // Collect User's liked tracks and store in list
 async function getUsersTracks(){
   accessToken = localStorage.getItem('access_token');
-  const response = await fetch('https://api.spotify.com/v1/me/tracks?offset='+userTrackOffset+'&limit=50', {
+  const response = await fetch('https://api.spotify.com/v1/me/tracks?offset='+userTrackOffset+'&limit=1', {
     method: 'GET',
     headers: {
       Authorization: 'Bearer ' + accessToken
     }
   });
   const usersTracks =  await response.json();
-  userTrackOffset += 50;
+  userTrackOffset += 1;
   for (let i = 0; i < usersTracks.items.length; i++){
     console.log(usersTracks.items[i].track);
     readTrack(usersTracks.items[i].track);
   }
   if (usersTracks.items.length == 50){
-    setTimeout(getUsersTracks(), 1000);
+    //setTimeout(getUsersTracks(), 1000);
   } else {
-    getCurrentTracks();
+    //getCurrentTracks();
   }
-  activateBTN();
+  //activateBTN();
 }
 
 // Read the track information and store in list of all tracks
