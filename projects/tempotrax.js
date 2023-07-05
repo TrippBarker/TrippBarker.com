@@ -172,6 +172,7 @@ async function readPlaylist(playlistID){
 }
 
 async function createPlaylist(){
+  playlistSongs = '';
   accessToken = localStorage.getItem('access_token');
   const response = await fetch('https://api.spotify.com/v1/users/'+localStorage.getItem('userID')+'/playlists',{
     method: 'POST',
