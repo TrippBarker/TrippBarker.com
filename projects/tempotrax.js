@@ -159,10 +159,10 @@ async function readTrack(rawTracks){
   console.log(rawTracks);
   let trackIDS = '';
   for (let i = rawTracks.length; i > 0; i--){
-    if (trackIDS.length == 0){
-      trackIDS = rawTracks[0].id;
+    if (trackIDS == ''){
+      trackIDS = rawTracks[i].track.id;
     } else {
-      trackIDS = rawTracks[0].id + '%2' + trackIDS;
+      trackIDS = rawTracks[i].track.id + '%2' + trackIDS;
     }
   }
   console.log(trackIDS);
