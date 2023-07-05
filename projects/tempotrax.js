@@ -181,7 +181,7 @@ async function readTrack(trackInfo){
       audioFeatures[0].energy > minEnergy &&
       audioFeatures[0].energy < maxEnergy &&
       playlistSize < maxSize){
-    songArtist = trackInfo.artists.name;
+    songArtist = trackInfo.artists[0].name;
     songAlbum = trackInfo.album.name;
     songID = trackInfo.id;
     songName = trackInfo.name;
