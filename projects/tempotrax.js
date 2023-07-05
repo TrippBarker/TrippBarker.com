@@ -126,7 +126,7 @@ async function getUsersTracks(){
   const usersTracks =  await response.json();
   for (let i = 0; i < usersTracks.items.length; i++){
     playlistSize++;
-    console.log(usersTracks[i].name + " " + playlistSize);
+    console.log(usersTracks.items[i].name + " " + playlistSize);
   }
 }
 
