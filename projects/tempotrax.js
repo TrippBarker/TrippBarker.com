@@ -135,7 +135,6 @@ async function getAccessToken(){
   // Get all of Users liked tracks
   getUsersTracks();
 }
-getAccessToken();
 
 // Collect User's liked tracks and store in list
 async function getUsersTracks(){
