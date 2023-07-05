@@ -22,7 +22,8 @@ let code = urlParams.get('code');
 const clientId = '8e81373db75b4fc1ab89d7e246c17c73';
 const redirectUri = 'https://www.trippbarker.com/projects/tempotrax';
 
-// Global Variables
+// GLOBAL VARIABLES
+
 let codeVerifier = localStorage.getItem('code_verifier');
 let playlistSongs = '';
 const maxSize = 100;
@@ -154,7 +155,7 @@ async function getUsersTracks(){
   if (usersTracks.items.length == 50){
     setTimeout(getUsersTracks(), 1000);
   } else {
-    getCurrentTracks();
+    //getCurrentTracks();
   }
   activateBTN();
 }
