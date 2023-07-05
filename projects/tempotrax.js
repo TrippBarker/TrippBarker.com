@@ -15,6 +15,7 @@ const minDanceVal = document.querySelector('#minDanceVal');
 const maxEnergyVal = document.querySelector('#maxEnergyVal');
 const minEnergyVal = document.querySelector('#minEnergyVal');
 const trackTBL = document.querySelector('#trackTBL');
+const createBTN = document.querySelector('#createBTN');
 
 const urlParams = new URLSearchParams(window.location.search);
 let code = urlParams.get('code');
@@ -49,6 +50,11 @@ let body = new URLSearchParams({
 function displayInfo(e){
   infoBox.classList.toggle("visible");
   app.classList.toggle("dimmed");
+}
+
+function activateBTN(e){
+  createBTN.classList.toggle("disabled");
+  createBTN.classList.toggle("dimmed");
 }
 
 function updateVal(e){
@@ -121,6 +127,8 @@ async function getAccessToken(){
   }).catch(error => {
       console.error('Error:', error);
   });
+  getUsersTracks();
+  activateBTN();
 }
 
 async function populateUI() {
@@ -163,7 +171,11 @@ async function getUsersTracks(){
   }
   if (usersTracks.items.length == 50){
     getUsersTracks();
+  } else {
+    getCurrentTracks();
+
   }
+
 }
 
 async function readTrack(trackInfo){
@@ -282,9 +294,12 @@ function displayTracks(){
 // Event listeners live here
 infoBtn.addEventListener('click', displayInfo);
 infoBox.addEventListener('click', displayInfo);
+createBTN.addEventListener('click', createPlaylist);
 maxTempoSLDR.addEventListener('input', updateVal);
 minTempoSLDR.addEventListener('input', updateVal);
 maxDanceSLDR.addEventListener('input', updateVal);
 minDanceSLDR.addEventListener('input', updateVal);
 maxEnergySLDR.addEventListener('input', updateVal);
 minEnergySLDR.addEventListener('input', updateVal);
+
+getAccessToken();
