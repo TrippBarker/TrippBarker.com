@@ -156,6 +156,7 @@ async function getUsersTracks(){
   const usersTracks =  await response.json();
   userTrackOffset += 50;
   for (let i = 0; i < usersTracks.items.length; i++){
+    console.log(usersTracks.items[i].track.id);
     readTrack(usersTracks.items[i].track.id);
   }
   if (usersTracks.items.length == 50){
