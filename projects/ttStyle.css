@@ -4,7 +4,7 @@
 }
 
 body{
-    background: linear-gradient(135deg, #16315a 0%, #542e58 50%, #16315a 100%);
+    background: whitesmoke;
 }
 
 #header {
@@ -96,7 +96,7 @@ button:active {
   border-radius: 50rem;
   width: 45rem;
   height: 4rem;
-  background: linear-gradient(135deg, #ff0000 0%, #d04e0e 50%, #ea0d0d 100%);
+  background: slategray;
 }
 
 .slider::-webkit-slider-thumb {
