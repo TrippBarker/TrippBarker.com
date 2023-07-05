@@ -152,7 +152,7 @@ async function getUsersTracks(){
   if (usersTracks.items.length == 50){
     setTimeout(getUsersTracks(), 1000);
   } else {
-    //getCurrentTracks();
+    getCurrentTracks();
   }
   activateBTN();
 }
