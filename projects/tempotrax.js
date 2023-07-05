@@ -22,14 +22,15 @@ let code = urlParams.get('code');
 const clientId = '8e81373db75b4fc1ab89d7e246c17c73';
 const redirectUri = 'https://www.trippbarker.com/projects/tempotrax';
 
+// Global Variables
 let codeVerifier = localStorage.getItem('code_verifier');
 let playlistSongs = '';
 const maxSize = 100;
 let currentTracks = [];
 let allTracks = [];
 let playlistSize = 0;
-let minBPM = 90;
-let maxBPM = 115;
+let minBPM = 1;
+let maxBPM = 200;
 let minDanceability = 0.40;
 let maxDanceability = 0.75;
 let minEnergy = 0.40;
@@ -45,8 +46,8 @@ let body = new URLSearchParams({
 });
 
 
-// EVENT HANDLERS
-// Function called to make the information box visible
+// EVENT HANDLING FUNCTIONS
+
 function displayInfo(e){
   infoBox.classList.toggle("visible");
   app.classList.toggle("dimmed");
@@ -57,6 +58,7 @@ function activateBTN(e){
   createBTN.classList.toggle("dimmed");
 }
 
+// Update track search parameters on slider input
 function updateVal(e){
   if(e.srcElement.id == 'maxTempoSLDR'){
     maxBPM = e.srcElement.value;
@@ -107,9 +109,11 @@ function updateVal(e){
       maxEnergyVal.innerHTML = (e.srcElement.value * 0.01).toFixed(2);
     }
   }
+  // Update current tracks with new search params
   getCurrentTracks();
 }
 
+// Get user access token
 async function getAccessToken(){
   const response = fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',
@@ -127,33 +131,12 @@ async function getAccessToken(){
   }).catch(error => {
       console.error('Error:', error);
   });
+  // Get all of Users liked tracks
   getUsersTracks();
 }
+getAccessToken();
 
-async function populateUI() {
-  accessToken = localStorage.getItem('access_token');
-  const response = await fetch('https://api.spotify.com/v1/me', {
-    headers: {
-      Authorization: 'Bearer ' + accessToken
-    }
-  });
-  profile = await response.json();
-  document.getElementById("displayName").innerText = profile.display_name;
-  if (profile.images[0]) {
-      const profileImage = new Image(200, 200);
-      profileImage.src = profile.images[0].url;
-      document.getElementById("avatar").appendChild(profileImage);
-      document.getElementById("imgUrl").innerText = profile.images[0].url;
-  }
-  document.getElementById("id").innerText = profile.id;
-  localStorage.setItem('userID', profile.id)
-  document.getElementById("email").innerText = profile.email;
-  document.getElementById("uri").innerText = profile.uri;
-  document.getElementById("uri").setAttribute("href", profile.external_urls.spotify);
-  document.getElementById("url").innerText = profile.href;
-  document.getElementById("url").setAttribute("href", profile.href);
-}
-
+// Collect User's liked tracks and store in list
 async function getUsersTracks(){
   accessToken = localStorage.getItem('access_token');
   const response = await fetch('https://api.spotify.com/v1/me/tracks?offset='+userTrackOffset+'&limit=50', {
@@ -176,6 +159,7 @@ async function getUsersTracks(){
   activateBTN();
 }
 
+// Read the track information and store in list of all tracks
 async function readTrack(trackInfo){
   accessToken = localStorage.getItem('access_token');
   const trackFeat = await fetch('https://api.spotify.com/v1/audio-features?ids='+trackInfo.id,{
@@ -191,6 +175,7 @@ async function readTrack(trackInfo){
   songID = trackInfo.id;
   songName = trackInfo.name;
   songBPM = audioFeatures[0].tempo;
+  // Dyanmically adjust min/max BPM if new extreme tempo params are found
   if (songBPM > maxBPM){
     maxTempoSLDR.max = Math.ceil(songBPM);
     minTempoSLDR.max = Math.ceil(songBPM);
@@ -204,6 +189,7 @@ async function readTrack(trackInfo){
   allTracks.push(trackEntry);
 }
 
+// Create new list of all songs that match search params
 function getCurrentTracks(){
   currentTracks = [];
   playlistSize = 0;
@@ -228,6 +214,7 @@ function getCurrentTracks(){
   displayTracks();
 }
 
+// Create a new playlist when user presses 'create' button
 async function createPlaylist(){
   accessToken = localStorage.getItem('access_token');
   const response = await fetch('https://api.spotify.com/v1/users/'+localStorage.getItem('userID')+'/playlists',{
@@ -242,6 +229,7 @@ async function createPlaylist(){
   addSongsToPlaylist(data.id);
 }
 
+// add songs to the newly created playlist
 async function addSongsToPlaylist(playlistID){
   accessToken = localStorage.getItem('access_token');
   const response = await fetch('https://api.spotify.com/v1/playlists/'+playlistID+'/tracks',{
@@ -255,11 +243,7 @@ async function addSongsToPlaylist(playlistID){
   const addSongsRes = await response.json();
 }
 
-function printSongs(){
-  console.log(allTracks);
-  console.log(currentTracks);
-}
-
+// Display tracks that match slider search params in table
 function displayTracks(){
   while (trackTBL.firstChild) {
     trackTBL.removeChild(trackTBL.firstChild);
@@ -296,6 +280,13 @@ function displayTracks(){
   }
 }
 
+// HELPFUL BUG HUNTING FUNCTIONS
+
+function printSongs(){
+  console.log(allTracks);
+  console.log(currentTracks);
+}
+
 
 // Event listeners live here
 infoBtn.addEventListener('click', displayInfo);
@@ -307,5 +298,3 @@ maxDanceSLDR.addEventListener('input', updateVal);
 minDanceSLDR.addEventListener('input', updateVal);
 maxEnergySLDR.addEventListener('input', updateVal);
 minEnergySLDR.addEventListener('input', updateVal);
-
-getAccessToken();
