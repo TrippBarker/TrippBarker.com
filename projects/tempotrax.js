@@ -202,6 +202,7 @@ async function readTrack(trackInfo){
 function getCurrentTracks(){
   currentTracks = [];
   playlistSize = 0;
+  playlistSongs = '';
   for (let i = 0; i < allTracks.length; i ++){
     if (allTracks[i].tempo > minBPM && 
       allTracks[i].tempo < maxBPM && 
