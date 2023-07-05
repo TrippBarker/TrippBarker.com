@@ -124,7 +124,10 @@ async function getUsersTracks(){
     }
   });
   const usersTracks =  await response.json();
-  console.log(usersTracks);
+  for (let i = 0; i < userTracks.items.length; i++){
+    playlistSize++;
+    console.log(usersTracks[i].name + " " + playlistSize);
+  }
 }
 
 async function getPlaylists(){
