@@ -158,7 +158,7 @@ async function getUsersTracks(){
 async function readTrack(rawTracks){
   console.log(rawTracks);
   let trackIDS = '';
-  for (let i = rawTracks.items.length; i > 0; i--){
+  for (let i = rawTracks.length; i > 0; i--){
     if (trackIDS.length == 0){
       trackIDS = rawTracks[0].id;
     } else {
