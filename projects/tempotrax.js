@@ -147,7 +147,7 @@ async function populateUI() {
 
 async function getUsersTracks(){
   accessToken = localStorage.getItem('access_token');
-  const response = await fetch('https://api.spotify.com/v1/me/tracks?offset='+userTrackOffset+'&limit=2', {
+  const response = await fetch('https://api.spotify.com/v1/me/tracks?offset='+userTrackOffset+'&limit=50', {
     method: 'GET',
     headers: {
       Authorization: 'Bearer ' + accessToken
@@ -159,7 +159,7 @@ async function getUsersTracks(){
     readTrack(usersTracks.items[i].track.id);
   }
   if (usersTracks.items.length == 50){
-    //getUsersTracks();
+    getUsersTracks();
   }
 }
 
@@ -186,10 +186,10 @@ async function readTrack(trackID){
       audioFeatures[0].energy > minEnergy &&
       audioFeatures[0].energy < maxEnergy &&
       playlistSize < maxSize){
-    songArtist = trackInfo.items[0].track.artist;
-    songAlbum = trackInfo.items[0].track.album.name;
-    songID = trackInfo.items[0].track.id;
-    songName = trackInfo.items[0].track.name;
+    songArtist = trackInfo.artists.name;
+    songAlbum = trackInfo.album.name;
+    songID = trackInfo.id;
+    songName = trackInfo.name;
     songBPM = audioFeatures[0].tempo;
     songDanceability = audioFeatures[0].danceability;
     songEnergy = audioFeatures[0].energy;
