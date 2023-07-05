@@ -169,7 +169,7 @@ async function getUsersTracks(){
     readTrack(usersTracks.items[i].track);
   }
   if (usersTracks.items.length == 50){
-    getUsersTracks();
+    setTimeout(getUsersTracks(), 1000);
   } else {
     getCurrentTracks();
   }
