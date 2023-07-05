@@ -156,12 +156,13 @@ async function getUsersTracks(){
 
 // Read the track information and store in list of all tracks
 async function readTrack(rawTracks){
+  console.log(rawTracks);
   let trackIDS = '';
   for (let i = rawTracks.items.length; i > 0; i--){
     if (trackIDS.length == 0){
-      trackIDS = rawTracks.items[0].id;
+      trackIDS = rawTracks[0].id;
     } else {
-      trackIDS = rawTracks.items[0].id + '%2' + trackIDS;
+      trackIDS = rawTracks[0].id + '%2' + trackIDS;
     }
   }
   console.log(trackIDS);
