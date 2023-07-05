@@ -23,7 +23,7 @@ const redirectUri = 'https://www.trippbarker.com/projects/tempotrax';
 
 let codeVerifier = localStorage.getItem('code_verifier');
 let playlistSongs = '';
-const maxSize = 99;
+const maxSize = 100;
 let allTracks = [];
 let playlistSize = 0;
 let minBPM = 1;
