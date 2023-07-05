@@ -156,10 +156,52 @@ async function getUsersTracks(){
   const usersTracks =  await response.json();
   userTrackOffset += 50;
   for (let i = 0; i < usersTracks.items.length; i++){
-    readPlaylist(usersTracks.items[i].id);
+    readTrack(usersTracks.items[i].track.id);
   }
   if (usersTracks.items.length == 50){
     getUsersTracks();
+  }
+}
+
+async function readTrack(trackID){
+  accessToken = localStorage.getItem('access_token');
+  const response = await fetch('https://api.spotify.com/v1/tracks/'+trackID, {
+    headers: {
+      Authorization: 'Bearer ' + accessToken
+    }
+  })
+  trackInfo = await response.json();
+  const trackFeat = await fetch('https://api.spotify.com/v1/audio-features?ids='+trackID,{
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer ' + accessToken
+    }
+  })
+  const trackTempo = await trackFeat.json();
+  const audioFeatures = trackTempo.audio_features;
+  if (audioFeatures[0].tempo > minBPM && 
+      audioFeatures[0].tempo < maxBPM && 
+      audioFeatures[0].danceability > minDanceability &&
+      audioFeatures[0].danceability < maxDanceability &&
+      audioFeatures[0].energy > minEnergy &&
+      audioFeatures[0].energy < maxEnergy &&
+      playlistSize < maxSize){
+    songArtist = tracks.items[i].track.artist;
+    songAlbum = tracks.items[i].track.album.name;
+    songID = tracks.items[i].track.id;
+    songName = tracks.items[i].track.name;
+    songBPM = audioFeatures[0].tempo;
+    songDanceability = audioFeatures[0].danceability;
+    songEnergy = audioFeatures[0].energy;
+    let trackInfo = {name: songName, artist: songArtist, album: songAlbum, id: songID, tempo: songBPM, danceability: songDanceability, energy: songEnergy};
+    allTracks.push(trackInfo);
+    playlistSize++;
+    if (playlistSongs.length == 0){
+      playlistSongs += '"spotify:track:'+songID+'"';
+    } else {
+      playlistSongs += ',"spotify:track:'+songID+'"';
+    }
+    console.log(songID + ' ' + playlistSize);
   }
 }
 
@@ -174,6 +216,39 @@ async function getPlaylists(){
   const playlists =  await response.json();
   for (let i = 0; i < playlists.items.length; i ++){
     readPlaylist(playlists.items[i].id);
+  }
+    const trackFeat = await fetch('https://api.spotify.com/v1/audio-features?ids=' + tracks.items[i].track.id,{
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + accessToken
+      }
+    })
+    const trackTempo = await trackFeat.json();
+    const audioFeatures = trackTempo.audio_features;
+    if (audioFeatures[0].tempo > minBPM && 
+        audioFeatures[0].tempo < maxBPM && 
+        audioFeatures[0].danceability > minDanceability &&
+        audioFeatures[0].danceability < maxDanceability &&
+        audioFeatures[0].energy > minEnergy &&
+        audioFeatures[0].energy < maxEnergy &&
+        playlistSize < maxSize){
+      songArtist = tracks.items[i].track.artist;
+      songAlbum = tracks.items[i].track.album.name;
+      songID = tracks.items[i].track.id;
+      songName = tracks.items[i].track.name;
+      songBPM = audioFeatures[0].tempo;
+      songDanceability = audioFeatures[0].danceability;
+      songEnergy = audioFeatures[0].energy;
+      let trackInfo = {name: songName, artist: songArtist, album: songAlbum, id: songID, tempo: songBPM, danceability: songDanceability, energy: songEnergy};
+      allTracks.push(trackInfo);
+      playlistSize++;
+      if (playlistSongs.length == 0){
+        playlistSongs += '"spotify:track:'+songID+'"';
+      } else {
+        playlistSongs += ',"spotify:track:'+songID+'"';
+      }
+      console.log(songID + ' ' + playlistSize);
+
   }
 }
 
