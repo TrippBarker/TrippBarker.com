@@ -184,7 +184,7 @@ async function addSongsToPlaylist(playlistID){
 
 function printSongs(){
   for (let i = 0; i < allTracks.length; i++){
-    console.log('NAME: ' + allTracks[i].name + ' ARTIST: ' + allTracks[i].artist + ' ALBUM: ' + allTracks[i].album + ' ID: ' + allTracks[i].id + ' TEMPO: ' + allTracks[i].tempo + ' DANCEABILITY: ' + allTracks[i].danceability + ' ENERGY: ' + allTrack[i].energy);
+    console.log('NAME: ' + allTracks[i].name + ' ARTIST: ' + allTracks[i].artist + ' ALBUM: ' + allTracks[i].album + ' ID: ' + allTracks[i].id + ' TEMPO: ' + allTracks[i].tempo + ' DANCEABILITY: ' + allTracks[i].danceability + ' ENERGY: ' + allTracks[i].energy);
   }
 }
 
