@@ -143,18 +143,22 @@ async function getUsersTracks(){
       Authorization: 'Bearer ' + accessToken
     }
   });
-  const usersTracks =  await response.json();
-  userTrackOffset += 1;
-  for (let i = 0; i < usersTracks.items.length; i++){
-    console.log(usersTracks.items[i].track);
-    readTrack(usersTracks.items[i].track);
-  }
-  if (usersTracks.items.length == 50){
-    //setTimeout(getUsersTracks(), 1000);
+  if (!response.ok){
+    throw new Error('HTTP status ' + response.status);
   } else {
-    //getCurrentTracks();
+    const usersTracks =  await response.json();
+    userTrackOffset += 1;
+    for (let i = 0; i < usersTracks.items.length; i++){
+      console.log(usersTracks.items[i].track);
+      readTrack(usersTracks.items[i].track);
+    }
+    if (usersTracks.items.length == 50){
+      //setTimeout(getUsersTracks(), 1000);
+    } else {
+      //getCurrentTracks();
+    }
+    //activateBTN();
   }
-  //activateBTN();
 }
 
 // Read the track information and store in list of all tracks
