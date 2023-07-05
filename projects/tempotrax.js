@@ -145,11 +145,7 @@ async function getUsersTracks(){
   });
   const usersTracks =  await response.json();
   userTrackOffset += 1;
-  for (let i = 0; i < usersTracks.items.length; i++){
-    console.log('hello');
-    console.log(usersTracks.items[i].track);
-    readTrack(usersTracks.items[i].track);
-  }
+  readTrack(usersTracks.items);
   if (usersTracks.items.length == 50){
     setTimeout(getUsersTracks(), 1000);
   } else {
@@ -159,33 +155,43 @@ async function getUsersTracks(){
 }
 
 // Read the track information and store in list of all tracks
-async function readTrack(trackInfo){
+async function readTrack(rawTracks){
+  let trackIDS = '';
+  for (let i = rawTracks.items.length; i > 0; i--){
+    if (trackIDS.length == 0){
+      trackIDS = rawTracks.items[0].id;
+    } else {
+      trackIDS = rawTracks.items[0].id + '%2' + trackIDS;
+    }
+  }
+  console.log(trackIDS);
   accessToken = localStorage.getItem('access_token');
-  const trackFeat = await fetch('https://api.spotify.com/v1/audio-features?ids='+trackInfo.id,{
+  const trackFeat = await fetch('https://api.spotify.com/v1/audio-features?ids='+trackIDS,{
     method: 'GET',
     headers: {
       Authorization: 'Bearer ' + accessToken
     }
   })
-  const trackTempo = await trackFeat.json();
-  const audioFeatures = trackTempo.audio_features;
-  songArtist = trackInfo.artists[0].name;
-  songAlbum = trackInfo.album.name;
-  songID = trackInfo.id;
-  songName = trackInfo.name;
-  songBPM = audioFeatures[0].tempo;
+  const allTrackFeats = await trackFeat.json();
+  console.log(allTrackFeats);
+  //const audioFeatures = trackTempo.audio_features;
+  //songArtist = trackInfo.artists[0].name;
+  //songAlbum = trackInfo.album.name;
+  //songID = trackInfo.id;
+  //songName = trackInfo.name;
+  //songBPM = audioFeatures[0].tempo;
   // Dyanmically adjust min/max BPM if new extreme tempo params are found
-  if (songBPM > maxBPM){
-    maxTempoSLDR.max = Math.ceil(songBPM);
-    minTempoSLDR.max = Math.ceil(songBPM);
-  } else if (songBPM < minBPM){
-    maxTempoSLDR.min = Math.floor(songBPM);
-    minTempoSLDR.min = Math.floor(songBPM);
-  }
-  songDanceability = audioFeatures[0].danceability;
-  songEnergy = audioFeatures[0].energy;
-  let trackEntry = {name: songName, artist: songArtist, album: songAlbum, id: songID, tempo: songBPM, danceability: songDanceability, energy: songEnergy};
-  allTracks.push(trackEntry);
+  //if (songBPM > maxBPM){
+    //maxTempoSLDR.max = Math.ceil(songBPM);
+    //minTempoSLDR.max = Math.ceil(songBPM);
+  //} else if (songBPM < minBPM){
+    //maxTempoSLDR.min = Math.floor(songBPM);
+    //minTempoSLDR.min = Math.floor(songBPM);
+  //}
+  //songDanceability = audioFeatures[0].danceability;
+  //songEnergy = audioFeatures[0].energy;
+  //let trackEntry = {name: songName, artist: songArtist, album: songAlbum, id: songID, tempo: songBPM, danceability: songDanceability, energy: songEnergy};
+  //allTracks.push(trackEntry);
 }
 
 // Create new list of all songs that match search params
