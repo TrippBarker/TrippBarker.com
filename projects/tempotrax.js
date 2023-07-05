@@ -113,6 +113,21 @@ async function populateUI() {
   document.getElementById("url").setAttribute("href", profile.href);
 }
 
+async function getUsersTracks(){
+  playlistSize = 0;
+  accessToken = localStorage.getItem('access_token');
+  const response = await fetch('https://api.spotify.com/v1/me/tracks', {
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer ' + accessToken
+    }
+  });
+  const usersTracks =  await response.json();
+  for (let i = 0; i < usersTracks.items.length; i ++){
+    readPlaylist(usersTracks.items[i].id);
+  }
+}
+
 async function getPlaylists(){
   playlistSize = 0;
   accessToken = localStorage.getItem('access_token');

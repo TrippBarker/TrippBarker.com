@@ -29,7 +29,7 @@ let codeVerifier = generateRandomString(128);
 
 generateCodeChallenge(codeVerifier).then(codeChallenge => {
   let state = generateRandomString(16);
-  let scope = 'user-read-private user-read-email playlist-modify-public playlist-modify-private playlist-read-private playlist-read-collaborative';
+  let scope = 'user-read-private user-read-email playlist-modify-public playlist-modify-private playlist-read-private playlist-read-collaborative user-library-read';
 
   localStorage.setItem('code_verifier', codeVerifier);
 
