@@ -53,21 +53,51 @@ function updateVal(e){
   if(e.srcElement.id == 'maxTempoSLDR'){
     maxBPM = e.srcElement.value;
     maxTempoVal.innerHTML = e.srcElement.value;
+    if (parseInt(minTempoSLDR.value) > parseInt(e.srcElement.value)){
+      minTempoSLDR.value = e.srcElement.value;
+      minBPM = e.srcElement.value;
+      minTempoVal.innerHTML = e.srcElement.value;
+    }
   } else if(e.srcElement.id == 'minTempoSLDR'){
     minBPM = e.srcElement.value;
     minTempoVal.innerHTML = e.srcElement.value;
+    if (parseInt(maxTempoSLDR.value) < parseInt(e.srcElement.value)){
+      maxTempoSLDR.value = e.srcElement.value;
+      maxBPM = e.srcElement.value;
+      maxTempoVal.innerHTML = e.srcElement.value;
+    }
   } else if (e.srcElement.id == 'maxDanceSLDR'){
     maxDanceability = (e.srcElement.value * 0.01).toFixed(2);
     maxDanceVal.innerHTML = (e.srcElement.value * 0.01).toFixed(2);
+    if (parseInt(minDanceSLDR.value) > parseInt(e.srcElement.value)){
+      minDanceSLDR.value = e.srcElement.value;
+      minDanceability = (e.srcElement.value * 0.01).toFixed(2);
+      minDanceVal.innerHTML = (e.srcElement.value * 0.01).toFixed(2);
+    }
   } else if (e.srcElement.id == 'minDanceSLDR'){
     minDanceability -= (e.srcElement.value * 0.01).toFixed(2);
     minDanceVal.innerHTML = (e.srcElement.value * 0.01).toFixed(2);
+    if (parseInt(maxDanceSLDR.value) < parseInt(e.srcElement.value)){
+      maxDanceSLDR.value = e.srcElement.value;
+      maxDanceability = (e.srcElement.value * 0.01).toFixed(2);
+      maxDanceVal.innerHTML = (e.srcElement.value * 0.01).toFixed(2);
+    }
   } else if (e.srcElement.id == 'maxEnergySLDR'){
     maxEnergy = (e.srcElement.value * 0.01).toFixed(2);
     maxEnergyVal.innerHTML = (e.srcElement.value * 0.01).toFixed(2);
+    if (parseInt(minEnergySLDR.value) > parseInt(e.srcElement.value)){
+      minEnergySLDR.value = e.srcElement.value;
+      minEnergy = (e.srcElement.value * 0.01).toFixed(2);
+      minEnergyVal.innerHTML = (e.srcElement.value * 0.01).toFixed(2);
+    }
   } else if (e.srcElement.id == 'minEnergySLDR'){
     minEnergy = (e.srcElement.value * 0.01).toFixed(2);
     minEnergyVal.innerHTML = (e.srcElement.value * 0.01).toFixed(2);
+    if (parseInt(maxEnergySLDR.value) < parseInt(e.srcElement.value)){
+      maxEnergySLDR.value = e.srcElement.value;
+      maxEnergy = (e.srcElement.value * 0.01).toFixed(2);
+      maxEnergyVal.innerHTML = (e.srcElement.value * 0.01).toFixed(2);
+    }
   }
 }
 
