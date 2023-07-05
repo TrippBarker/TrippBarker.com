@@ -166,7 +166,7 @@ async function getUsersTracks(){
 
 async function readTrack(trackInfo){
   accessToken = localStorage.getItem('access_token');
-  const trackFeat = await fetch('https://api.spotify.com/v1/audio-features?ids='+trackID,{
+  const trackFeat = await fetch('https://api.spotify.com/v1/audio-features?ids='+trackInfo.id,{
     method: 'GET',
     headers: {
       Authorization: 'Bearer ' + accessToken
