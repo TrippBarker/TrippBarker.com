@@ -137,14 +137,14 @@ async function getAccessToken(){
 // Collect User's liked tracks and store in list
 async function getUsersTracks(){
   accessToken = localStorage.getItem('access_token');
-  const response = await fetch('https://api.spotify.com/v1/me/tracks?offset='+userTrackOffset+'&limit=3', {
+  const response = await fetch('https://api.spotify.com/v1/me/tracks?offset='+userTrackOffset+'&limit=50', {
     method: 'GET',
     headers: {
       Authorization: 'Bearer ' + accessToken
     }
   });
   const usersTracks =  await response.json();
-  userTrackOffset += 3;
+  userTrackOffset += 50;
   readTrack(usersTracks.items);
   if (usersTracks.items.length == 50){
     setTimeout(getUsersTracks(), 1000);
