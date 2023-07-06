@@ -133,6 +133,7 @@ async function getAccessToken(){
       console.error('Error:', error);
   });
   getUsersTracks();
+  activateBTN();
 }
 
 getAccessToken();
