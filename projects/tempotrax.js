@@ -177,23 +177,25 @@ async function readTrack(rawTracks){
   console.log(allTrackFeats);
   const audioFeatures = allTrackFeats.audio_features;
   console.log(audioFeatures);
-  //songArtist = trackInfo.artists[0].name;
-  //songAlbum = trackInfo.album.name;
-  //songID = trackInfo.id;
-  //songName = trackInfo.name;
-  //songBPM = audioFeatures[0].tempo;
-  // Dyanmically adjust min/max BPM if new extreme tempo params are found
-  //if (songBPM > maxBPM){
-    //maxTempoSLDR.max = Math.ceil(songBPM);
-    //minTempoSLDR.max = Math.ceil(songBPM);
-  //} else if (songBPM < minBPM){
-    //maxTempoSLDR.min = Math.floor(songBPM);
-    //minTempoSLDR.min = Math.floor(songBPM);
-  //}
-  //songDanceability = audioFeatures[0].danceability;
-  //songEnergy = audioFeatures[0].energy;
-  //let trackEntry = {name: songName, artist: songArtist, album: songAlbum, id: songID, tempo: songBPM, danceability: songDanceability, energy: songEnergy};
-  //allTracks.push(trackEntry);
+  for (let i = 0; i < rawTracks.length; i++){
+    songArtist = rawTracks[i].track.artists[0].name;
+    songAlbum = rawTracks[i].track.album.name;
+    songID = rawTracks[i].track.id;
+    songName = rawTracks[i].track.name;
+    songBPM = audioFeatures[i].tempo;
+    // Dyanmically adjust min/max BPM if new extreme tempo params are found
+    if (songBPM > maxBPM){
+      maxTempoSLDR.max = Math.ceil(songBPM);
+      minTempoSLDR.max = Math.ceil(songBPM);
+    } else if (songBPM < minBPM){
+      maxTempoSLDR.min = Math.floor(songBPM);
+      minTempoSLDR.min = Math.floor(songBPM);
+    }
+    songDanceability = audioFeatures[i].danceability;
+    songEnergy = audioFeatures[i].energy;
+    let trackEntry = {name: songName, artist: songArtist, album: songAlbum, id: songID, tempo: songBPM, danceability: songDanceability, energy: songEnergy};
+    allTracks.push(trackEntry);
+  }
 }
 
 // Create new list of all songs that match search params
