@@ -1,5 +1,5 @@
 html {
-    font-size: medium;
+    font-size: 7px;
 }
 
 *{
@@ -19,8 +19,8 @@ body{
 #info {
     background-color: whitesmoke;
     color: black;
-    width: 3rem;
-    height: 3rem;
+    width: 4rem;
+    height: 4rem;
     border-radius: 50%;
     font-size: 2rem;
     margin-left: auto;
@@ -31,12 +31,13 @@ body{
 #infoWords {
     background-color: #f7f3ea;
     border: 5px solid black;
-    height: 40rem;
-    width: 20rem;
+    height: 120rem;
+    width: 80rem;
     padding: 2rem;
 }
 
 #infoBox {
+    font-size: 4rem;
     color: black;
     background-color: transparent;
     position: fixed;
@@ -73,6 +74,12 @@ button:active {
     opacity: 50%;
 }
 
+.sliderGroup {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 #sliders, #controls {
     width: 100%;
     display: flex;
@@ -93,15 +100,16 @@ button:active {
 .sliderCont {
     display: flex;
     flex-direction: row;
-    margin: .5rem;
+    margin-top: .5rem;
     align-items: center;
     justify-content: space-between;
 }
 
 .sliderCont h1 {
+    font-size: 2rem;
     width: 20rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: .5rem;
+    padding-right: .5rem;
 }
 
 .slider {
@@ -124,6 +132,7 @@ button:active {
 
 table {
     margin-top: 1rem;
+    font-size: 3rem;
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;

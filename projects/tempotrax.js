@@ -160,7 +160,6 @@ async function getUsersTracks(){
 
 // Read the track information and store in list of all tracks
 async function readTrack(rawTracks){
-  console.log(rawTracks);
   let trackIDS = '';
   for (let i = rawTracks.length; i > 0; i--){
     if (trackIDS == ''){
@@ -169,7 +168,6 @@ async function readTrack(rawTracks){
       trackIDS = rawTracks[i-1].track.id + '%2c' + trackIDS;
     }
   }
-  console.log(trackIDS);
   accessToken = localStorage.getItem('access_token');
   const trackFeat = await fetch('https://api.spotify.com/v1/audio-features?ids='+trackIDS,{
     method: 'GET',
@@ -178,9 +176,7 @@ async function readTrack(rawTracks){
     }
   })
   const allTrackFeats = await trackFeat.json();
-  console.log(allTrackFeats);
   const audioFeatures = allTrackFeats.audio_features;
-  console.log(audioFeatures);
   for (let i = 0; i < rawTracks.length; i++){
     songArtist = rawTracks[i].track.artists[0].name;
     songAlbum = rawTracks[i].track.album.name;

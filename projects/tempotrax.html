@@ -29,36 +29,42 @@
     </div>
     <div id="application">
         <div id="sliders">
-            <div id="maxTempoCont" class="sliderCont">
-                <h1>MAX TEMPO:</h1>
-                <input type="range" min="1" max="200" class="slider" id="maxTempoSLDR" value="125">
-                <h1 id="maxTempoVal">115</h1>
-            </div>
-            <div id="minTempoCont" class="sliderCont">
-                <h1>MIN TEMPO:</h1>
-                <input type="range" min="1" max="200" class="slider" id="minTempoSLDR" value="85">
-                <h1 id="minTempoVal">90</h1>
-            </div>
-            <div id="maxDanceCont" class="sliderCont">
-                <h1>MAX DANCEABILITY:</h1>
-                <input type="range" min="1" max="100" class="slider" id="maxDanceSLDR" value="70">
-                <h1 id="maxDanceVal">0.75</h1>
-            </div>
-            <div id="minDanceCont" class="sliderCont">
-                <h1>MIN DANCEABILITY:</h1>
-                <input type="range" min="1" max="100" class="slider" id="minDanceSLDR" value="40">
-                <h1 id="minDanceVal">0.40</h1>
-            </div>
-            <div id="maxEnergyCont" class="sliderCont">
-                <h1>MAX ENERGY:</h1>
-                <input type="range" min="1" max="100" class="slider" id="maxEnergySLDR" value="75">
-                <h1 id="maxEnergyVal">0.75</h1>
-            </div>
-            <div id="minEnergyCont" class="sliderCont">
-                <h1>MIN ENERGY:</h1>
-                <input type="range" min="1" max="100" class="slider" id="minEnergySLDR" value="40">
-                <h1 id="minEnergyVal">0.40</h1>
-            </div>
+            <section class="sliderGroup">
+                <div id="maxTempoCont" class="sliderCont">
+                    <h1>MAX TEMPO:</h1>
+                    <input type="range" min="1" max="200" class="slider" id="maxTempoSLDR" value="125">
+                    <h1 id="maxTempoVal">115</h1>
+                </div>
+                <div id="minTempoCont" class="sliderCont">
+                    <h1>MIN TEMPO:</h1>
+                    <input type="range" min="1" max="200" class="slider" id="minTempoSLDR" value="85">
+                    <h1 id="minTempoVal">90</h1>
+                </div>
+            </section>
+            <section class="sliderGroup">
+                <div id="maxDanceCont" class="sliderCont">
+                    <h1>MAX DANCEABILITY:</h1>
+                    <input type="range" min="1" max="100" class="slider" id="maxDanceSLDR" value="70">
+                    <h1 id="maxDanceVal">0.75</h1>
+                </div>
+                <div id="minDanceCont" class="sliderCont">
+                    <h1>MIN DANCEABILITY:</h1>
+                    <input type="range" min="1" max="100" class="slider" id="minDanceSLDR" value="40">
+                    <h1 id="minDanceVal">0.40</h1>
+                </div>
+            </section>
+            <section class="sliderGroup">
+                <div id="maxEnergyCont" class="sliderCont">
+                    <h1>MAX ENERGY:</h1>
+                    <input type="range" min="1" max="100" class="slider" id="maxEnergySLDR" value="75">
+                    <h1 id="maxEnergyVal">0.75</h1>
+                </div>
+                <div id="minEnergyCont" class="sliderCont">
+                    <h1>MIN ENERGY:</h1>
+                    <input type="range" min="1" max="100" class="slider" id="minEnergySLDR" value="40">
+                    <h1 id="minEnergyVal">0.40</h1>
+                </div>
+            </section>
         </div>
         <div id="controls">
             <button id="createBTN" class="disabled dimmed">CREATE PLAYLIST</button>
