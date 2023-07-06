@@ -144,7 +144,7 @@ async function getUsersTracks(){
     }
   });
   const usersTracks =  await response.json();
-  userTrackOffset += 1;
+  userTrackOffset += 3;
   readTrack(usersTracks.items);
   if (usersTracks.items.length == 50){
     setTimeout(getUsersTracks(), 1000);
@@ -162,7 +162,7 @@ async function readTrack(rawTracks){
     if (trackIDS == ''){
       trackIDS = rawTracks[i-1].track.id;
     } else {
-      trackIDS = rawTracks[i-1].track.id + '%2' + trackIDS;
+      trackIDS = rawTracks[i-1].track.id + '%2c' + trackIDS;
     }
   }
   console.log(trackIDS);
