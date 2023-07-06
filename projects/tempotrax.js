@@ -132,7 +132,10 @@ async function getAccessToken(){
   }).catch(error => {
       console.error('Error:', error);
   });
+  getUsersTracks();
 }
+
+getAccessToken();
 
 // Collect User's liked tracks and store in list
 async function getUsersTracks(){
