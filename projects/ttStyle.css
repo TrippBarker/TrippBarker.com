@@ -147,3 +147,9 @@ td, th {
 tr:nth-child(even) {
     background-color: slategray;
 }
+
+@media (max-width: 1000px) {
+    html {
+        font-size: 5px;
+    }
+}
